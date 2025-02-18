@@ -14,7 +14,7 @@ build/
 
 ### Compiled Class Files ###
 **/*.class
-target
+target/
 
 ### IntelliJ IDEA ###
 .idea/
