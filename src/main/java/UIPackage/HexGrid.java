@@ -1,4 +1,4 @@
-package com.example.demo1;
+package UIPackage;
 /*-----------------------------------------*
  *
  * The implementation below is adapted from:
@@ -9,7 +9,96 @@ import javax.swing.*;
 import java.awt.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
+public class HexGrid extends JPanel
+{
+    private ArrayList<ArrayList<Point>> grid;
+
+    public HexGrid(ArrayList<ArrayList<Point>> hexagons) {
+        this.grid = hexagons;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        g.setColor(Color.BLUE);
+
+        for (ArrayList<Point> hexagon : grid) {
+            for (Point p : hexagon) {
+                int x = (int) Math.round(p.x);
+                int y = (int) Math.round(p.y);
+                g.fillOval(x - 5, y - 5, 10, 10);
+            }
+        }
+
+        for (ArrayList<Point> hexagon : grid) {
+            int p1xi, p1yi, p2xi, p2yi;
+            Point p1 = hexagon.get(0), p2;
+            for (int i = 1; i < hexagon.size(); i++)
+            {
+                p2 = hexagon.get(i);
+                p1xi = (int) Math.round(p1.x);
+                p1yi = (int) Math.round(p1.y);
+                p2xi = (int) Math.round(p2.x);
+                p2yi = (int) Math.round(p2.y);
+                g.drawLine(p1xi, p1yi, p2xi, p2yi);
+                p1 = p2;
+            }
+
+            p2 = hexagon.get(0);
+            p1xi = (int) Math.round(p1.x);
+            p1yi = (int) Math.round(p1.y);
+            p2xi = (int) Math.round(p2.x);
+            p2yi = (int) Math.round(p2.y);
+            g.drawLine(p1xi, p1yi, p2xi, p2yi);
+        }
+    }
+
+    static public void main(String[] args)
+    {
+        if (args.length != 3)
+        {
+            System.err.println("java HexGrid <size> <originx> <originy>");
+            System.exit(1);
+        }
+
+        double size = 0.0, originx = 0.0, originy = 0.0;
+        try {
+            size = Double.parseDouble(args[0]);
+            originx = Double.parseDouble(args[1]);
+            originy = Double.parseDouble(args[2]);
+        } catch (NumberFormatException e) {
+            System.err.println("Problems parsing double arguments.");
+            System.exit(1);
+        }
+
+        Layout flat = new Layout(Layout.flat,
+                new Point(size, size),
+                new Point(originx, originy));
+
+        int baseN = 6;
+        ArrayList<ArrayList<Point>> grid = new ArrayList<>();
+        for (int q = -baseN; q <= baseN; q++) {
+            for (int r = -baseN; r <= baseN; r++) {
+                for (int s = -baseN; s <= baseN; s++) {
+                    if ((q + r + s) == 0) {
+                        HexCube h = new HexCube(q, r, s);
+                        ArrayList<Point> corners = flat.polygonCorners(h);
+                        grid.add(corners);
+                    }
+                }
+            }
+        }
+
+        JFrame frame = new JFrame("HexGrid");
+        HexGrid panel = new HexGrid(grid);
+        frame.add(panel);
+        frame.setSize(400, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
 
 class Point
 {
@@ -188,95 +277,5 @@ class Layout
             corners.add(new Point(center.x + offset.x, center.y + offset.y));
         }
         return corners;
-    }
-}
-
-public class HexGrid extends JPanel
-{
-    private ArrayList<ArrayList<Point>> grid;
-
-    public HexGrid(ArrayList<ArrayList<Point>> hexagons) {
-        this.grid = hexagons;
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        g.setColor(Color.BLUE);
-
-        for (ArrayList<Point> hexagon : grid) {
-            for (Point p : hexagon) {
-                int x = (int) Math.round(p.x);
-                int y = (int) Math.round(p.y);
-                g.fillOval(x - 5, y - 5, 10, 10);
-            }
-        }
-
-        for (ArrayList<Point> hexagon : grid) {
-            int p1xi, p1yi, p2xi, p2yi;
-            Point p1 = hexagon.get(0), p2;
-            for (int i = 1; i < hexagon.size(); i++)
-            {
-                p2 = hexagon.get(i);
-                p1xi = (int) Math.round(p1.x);
-                p1yi = (int) Math.round(p1.y);
-                p2xi = (int) Math.round(p2.x);
-                p2yi = (int) Math.round(p2.y);
-                g.drawLine(p1xi, p1yi, p2xi, p2yi);
-                p1 = p2;
-            }
-
-            p2 = hexagon.get(0);
-            p1xi = (int) Math.round(p1.x);
-            p1yi = (int) Math.round(p1.y);
-            p2xi = (int) Math.round(p2.x);
-            p2yi = (int) Math.round(p2.y);
-            g.drawLine(p1xi, p1yi, p2xi, p2yi);
-        }
-    }
-
-    static public void main(String[] args)
-    {
-        if (args.length != 3)
-        {
-            System.err.println("java HexGrid <size> <originx> <originy>");
-            System.exit(1);
-        }
-
-        double size = 0.0, originx = 0.0, originy = 0.0;
-        try {
-            size = Double.parseDouble(args[0]);
-            originx = Double.parseDouble(args[1]);
-            originy = Double.parseDouble(args[2]);
-        } catch (NumberFormatException e) {
-            System.err.println("Problems parsing double arguments.");
-            System.exit(1);
-        }
-
-        Layout flat = new Layout(Layout.flat,
-                new Point(size, size),
-                new Point(originx, originy));
-
-        int baseN = 6;
-        ArrayList<ArrayList<Point>> grid = new ArrayList<>();
-        for (int q = -baseN; q <= baseN; q++) {
-            for (int r = -baseN; r <= baseN; r++) {
-                for (int s = -baseN; s <= baseN; s++) {
-                    if ((q + r + s) == 0) {
-                        HexCube h = new HexCube(q, r, s);
-                        ArrayList<Point> corners = flat.polygonCorners(h);
-                        grid.add(corners);
-                    }
-                }
-            }
-        }
-
-        JFrame frame = new JFrame("HexGrid");
-        HexGrid panel = new HexGrid(grid);
-        frame.add(panel);
-        frame.setSize(400, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
     }
 }
