@@ -9,6 +9,8 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.shape.Circle?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UIPackage.hexOustUIController">
    <children>
       <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#exit" prefHeight="30.0" prefWidth="67.0" text="EXIT">
@@ -4701,5 +4703,8 @@
             </RadialGradient>
          </fill>
       </Polygon>
+
+      <Label fx:id="turnIndicator" layoutX="445" layoutY="38" style="-fx-font-size: 18px;" text="Red Player's Turn" />
+      <Circle fx:id="turnIndicatorCircle" layoutX="430" layoutY="50" fill="RED" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
