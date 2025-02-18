@@ -1,12 +1,19 @@
 package com.example.demo1;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Polygon;
+import javafx.stage.Stage;
 
 import static javafx.scene.paint.Color.BLACK;
+import static javafx.scene.paint.Color.LIGHTSTEELBLUE;
 
 public class HelloController {
 
@@ -69,8 +76,37 @@ public class HelloController {
 
     @FXML
     void getHexID(MouseEvent event) {
+        RadialGradient paint = new RadialGradient(
+                0.0, 0.0, 0.4956, 0.5066, 0.4908, true, CycleMethod.NO_CYCLE,
+                new Stop(0.0, new Color(0.0, 0.0, 0.0, 1.0)),
+                new Stop(1.0, new Color(1.0, 1.0, 1.0, 1.0)));
+
         Polygon hexagon = (Polygon) event.getSource();
-        hexagon.setFill(BLACK);
+        if(hexagon.getFill() != BLACK){
+            hexagon.setFill(BLACK);
+        }
+        else{
+            hexagon.setFill(paint);
+        }
+
+    }
+
+    @FXML
+    void hover(MouseEvent event) {
+        Polygon hexagon = (Polygon) event.getSource();
+        hexagon.setStroke(LIGHTSTEELBLUE);
+        hexagon.setStrokeWidth(5);
+        hexagon.setOnMouseExited(Hoverevent -> {
+            hexagon.setStroke(BLACK);
+            hexagon.setStrokeWidth(3);// Revert to blue when mouse leaves
+        });
+    }
+
+    @FXML
+    void exit(MouseEvent event) {
+        Button exitButton = (Button) event.getSource();
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close(); 
     }
 
 }
