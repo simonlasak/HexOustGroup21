@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
@@ -82,13 +83,19 @@ public class HelloController {
                 new Stop(1.0, new Color(1.0, 1.0, 1.0, 1.0)));
 
         Polygon hexagon = (Polygon) event.getSource();
-        if(hexagon.getFill() != BLACK){
-            hexagon.setFill(BLACK);
+        if (hexagon.getFill() != BLACK || hexagon.getFill() == paint) {
+            // Only allow move if hexagon is not occupied
+            if (isRedTurn) {
+                hexagon.setFill(Color.RED);
+                turnIndicator.setText("Blue Player's Turn");
+                turnIndicatorCircle.setFill(Color.BLUE);
+            } else {
+                hexagon.setFill(Color.BLUE);
+                turnIndicator.setText("Red Player's Turn");
+                turnIndicatorCircle.setFill(Color.RED);
+            }
+            isRedTurn = !isRedTurn; // Switch turn
         }
-        else{
-            hexagon.setFill(paint);
-        }
-
     }
 
     @FXML
@@ -109,4 +116,12 @@ public class HelloController {
         stage.close(); 
     }
 
+
+    @FXML
+    private Label turnIndicator;
+
+    private boolean isRedTurn = true; // Start with Red Player
+
+    @FXML
+    private Circle turnIndicatorCircle;
 }

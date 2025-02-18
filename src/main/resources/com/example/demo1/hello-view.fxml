@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.Double?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Polygon?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
    <children>
       <Polygon fx:id="hex19" layoutX="300.0" layoutY="301.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
          <points>
@@ -196,6 +194,7 @@
             </RadialGradient>
          </fill>
       </Polygon>
+
       <Polygon fx:id="hex2" layoutX="375.0" layoutY="166.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
          <points>
             <Double fx:value="0.0" />
@@ -719,5 +718,7 @@
             <Font size="15.0" />
          </font>
       </Button>
+      <Label fx:id="turnIndicator" layoutX="270" layoutY="550" style="-fx-font-size: 18px;" text="Red Player's Turn" />
+      <Circle fx:id="turnIndicatorCircle" layoutX="250" layoutY="563" fill="RED" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
