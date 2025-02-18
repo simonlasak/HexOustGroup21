@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
+   <children>
+      <Polygon fx:id="hex19" layoutX="300.0" layoutY="301.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex13" layoutX="300.0" layoutY="211.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex7" layoutX="300.0" layoutY="481.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex16" layoutX="300.0" layoutY="391.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex14" layoutX="375.0" layoutY="256.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+
+      <Polygon fx:id="hex2" layoutX="375.0" layoutY="166.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex6" layoutX="375.0" layoutY="436.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex15" layoutX="375.0" layoutY="346.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex18" layoutX="225.0" layoutY="255.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex12" layoutX="225.0" layoutY="165.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex8" layoutX="225.0" layoutY="435.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex17" layoutX="225.0" layoutY="345.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex1" layoutX="300.0" layoutY="121.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex3" layoutX="450.0" layoutY="210.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex5" layoutX="450.0" layoutY="390.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex4" layoutX="450.0" layoutY="300.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex11" layoutX="150.0" layoutY="211.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex9" layoutX="150.0" layoutY="391.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Polygon fx:id="hex10" layoutX="150.0" layoutY="301.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
+         <points>
+            <Double fx:value="0.0" />
+            <Double fx:value="-50.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="-25.0" />
+            <Double fx:value="45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="25.0" />
+            <Double fx:value="-45.0" />
+            <Double fx:value="-25.0" />
+         </points>
+         <fill>
+            <RadialGradient centerX="0.4955946968515539" centerY="0.5066287806539825" radius="0.4908256530761718">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color opacity="0.5" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#exit" prefHeight="30.0" prefWidth="67.0" text="EXIT">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="turnIndicator" layoutX="270" layoutY="550" style="-fx-font-size: 18px;" text="Red Player's Turn" />
+      <Circle fx:id="turnIndicatorCircle" layoutX="250" layoutY="563" fill="RED" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+   </children>
+</AnchorPane>
