@@ -1,4 +1,4 @@
-module com.example.demo1 {
+module UIPackage {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -10,7 +10,8 @@ module com.example.demo1 {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
-    opens com.example.demo1 to javafx.fxml;
-    exports com.example.demo1;
+    opens UIPackage to javafx.fxml;
+    exports UIPackage;
 }
