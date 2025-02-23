@@ -12,9 +12,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
-
-import static javafx.scene.paint.Color.BLACK;
-import static javafx.scene.paint.Color.LIGHTSTEELBLUE;
+import static javafx.scene.paint.Color.*;
 
 public class hexOustUIController {
 
@@ -410,7 +408,7 @@ public class hexOustUIController {
             new Stop(1.0, new Color(1.0, 1.0, 1.0, 1.0)));
 
         Polygon hexagon = (Polygon) event.getSource();
-        if (hexagon.getFill() != BLACK || hexagon.getFill() == paint) {
+        if (hexagon.getFill() != RED && hexagon.getFill() != BLUE) {
             // Only allow move if hexagon is not occupied
             if (isRedTurn) {
                 hexagon.setFill(Color.RED);
