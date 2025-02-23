@@ -12,7 +12,7 @@ public class hexOustUIApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(hexOustUIApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-        stage.setTitle("Hi Simon :)!");
+        stage.setTitle("Group 21");
         stage.setScene(scene);
         stage.show();
     }
