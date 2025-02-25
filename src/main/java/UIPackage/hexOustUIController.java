@@ -401,13 +401,17 @@ public class hexOustUIController {
     private Polygon hex4;
 @FXML
     void getHexID(MouseEvent event) {
-        RadialGradient paint = new RadialGradient(
-            0.0, 0.0, 0.4956, 0.5066, 0.4908, true, CycleMethod.NO_CYCLE,
-            new Stop(0.0, new Color(0.0, 0.0, 0.0, 1.0)),
-            new Stop(0.0077, new Color(0.0, 0.0, 0.0, 0.5)),
-            new Stop(1.0, new Color(1.0, 1.0, 1.0, 1.0)));
 
-        Polygon hexagon = (Polygon) event.getSource();
+    double clickX = event.getSceneX();
+    double clickY = event.getSceneY();
+
+    Layout layout = new Layout(Layout.flat, new Point(50, 50), new Point(100, 100)); // Adjust the origin and size as needed
+
+    FractionalHexCube hexCoords = layout.pixelToHex(new Point(clickX, clickY));
+    hexCoords.hexRound();
+    System.out.println("Hexagon placed at: (q: " + hexCoords.q + ", r: " + hexCoords.r + ", s: " + hexCoords.s + ")");
+
+    Polygon hexagon = (Polygon) event.getSource();
         if (hexagon.getFill() != RED && hexagon.getFill() != BLUE) {
             // Only allow move if hexagon is not occupied
             if (isRedTurn) {

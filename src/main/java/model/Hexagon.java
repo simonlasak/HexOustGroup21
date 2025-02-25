@@ -1,4 +1,8 @@
 package model;
 
-public class Hexagoni {
+public class Hexagon {
+
+    public Hexagon(int q, int r, int s) {
+
+    }
 }
