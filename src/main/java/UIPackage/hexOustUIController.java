@@ -12,6 +12,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
+import static java.lang.Math.round;
 import static javafx.scene.paint.Color.*;
 
 public class hexOustUIController {
@@ -399,17 +400,28 @@ public class hexOustUIController {
 
     @FXML
     private Polygon hex4;
+
+
 @FXML
     void getHexID(MouseEvent event) {
 
     double clickX = event.getSceneX();
     double clickY = event.getSceneY();
+    double eventX = - event.getY();
+    double eventY = event.getX();
+    int centerX = (int) (clickX - eventX/2.0);
+    int centerY = (int) (clickY - eventY/2.0);
 
-    Layout layout = new Layout(Layout.flat, new Point(50, 50), new Point(100, 100)); // Adjust the origin and size as needed
+    int q = (centerX - 300) / 37;
+    int r = ((centerY - 300)/ 22 - q) / 2;
+    int s = -q-r;
 
-    FractionalHexCube hexCoords = layout.pixelToHex(new Point(clickX, clickY));
-    hexCoords.hexRound();
-    System.out.println("Hexagon placed at: (q: " + hexCoords.q + ", r: " + hexCoords.r + ", s: " + hexCoords.s + ")");
+    //System.out.println("x,y: "+ clickX + " + " + clickY);
+    //System.out.println("hex xy: "+eventX + " + " + eventY);
+    //System.out.println("res: " + centerX + " + " + centerY);
+    System.out.println("q: " + q + ", r: " + r + ", s: " + s);
+
+
 
     Polygon hexagon = (Polygon) event.getSource();
         if (hexagon.getFill() != RED && hexagon.getFill() != BLUE) {
