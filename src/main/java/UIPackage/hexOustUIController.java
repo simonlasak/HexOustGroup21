@@ -1,6 +1,7 @@
 package UIPackage;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -418,11 +419,20 @@ public class hexOustUIController {
     //create hexagon with that point p
     HexCube c = new HexCube(p);
 
-    System.out.println(c);
+    //System.out.println(c);
+
+
+    if (BoardLogic.isValidMove(c,isRedTurn) == false) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Move");
+        alert.setHeaderText(null);
+        alert.setContentText("You cannot place a hex here!");
+        alert.showAndWait();
+        return;
+    }
+
     BoardLogic.addToList(c, isRedTurn);
-
-
-    //BoardLogic.printLists();
+    BoardLogic.printLists();
 
     //this should probably be put in its own method
     Polygon hexagon = (Polygon) event.getSource();

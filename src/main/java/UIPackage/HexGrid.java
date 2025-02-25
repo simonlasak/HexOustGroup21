@@ -66,7 +66,7 @@ class HexCube
         return HexCube.directions.get(direction);
     }
 
-    public HexCube neighbor(int direction)
+    public HexCube neighbour(int direction)
     {
         return add(HexCube.direction(direction));
     }
@@ -86,7 +86,26 @@ class HexCube
         return "("+ q + ", " + r + ", " + s + ")";
     }
 
+    //adjacent hexes
+    public List<HexCube> getAllNeighbours() {
+        List<HexCube> adjHexes = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            //adding to array adjHexes
+            //"this" refers to the hexagon we call neighbour method on
+            adjHexes.add(this.neighbour(i));
+        }
+        return adjHexes;
+    }
 
+    //equals method
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;  // Check if both objects are the same instance
+        if (obj == null || getClass() != obj.getClass()) return false;  // Check if obj is null or not the same class
+
+        HexCube other = (HexCube) obj;  // Cast the object to HexCube
+        return this.q == other.q && this.r == other.r && this.s == other.s;  // Compare q, r, and s
+    }
 }
 
 
