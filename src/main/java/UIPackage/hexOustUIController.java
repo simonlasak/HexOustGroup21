@@ -405,6 +405,7 @@ public class hexOustUIController {
 @FXML
     void getHexID(MouseEvent event) {
 
+    //get centerpoint of hexagon clicked
     double clickX = event.getSceneX();
     double clickY = event.getSceneY();
     double eventX = - event.getY();
@@ -412,17 +413,18 @@ public class hexOustUIController {
     int centerX = (int) (clickX - eventX/2.0);
     int centerY = (int) (clickY - eventY/2.0);
 
-    int q = (centerX - 300) / 37;
-    int r = ((centerY - 300)/ 22 - q) / 2;
-    int s = -q-r;
+    //turn the center point into a Point p
+    Point p = new Point(centerX, centerY);
+    //create hexagon with that point p
+    HexCube c = new HexCube(p);
 
-    //System.out.println("x,y: "+ clickX + " + " + clickY);
-    //System.out.println("hex xy: "+eventX + " + " + eventY);
-    //System.out.println("res: " + centerX + " + " + centerY);
-    System.out.println("q: " + q + ", r: " + r + ", s: " + s);
-
+    System.out.println(c);
+    BoardLogic.addToList(c, isRedTurn);
 
 
+    //BoardLogic.printLists();
+
+    //this should probably be put in its own method
     Polygon hexagon = (Polygon) event.getSource();
         if (hexagon.getFill() != RED && hexagon.getFill() != BLUE) {
             // Only allow move if hexagon is not occupied
@@ -457,6 +459,7 @@ public class hexOustUIController {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
+
 
 
     @FXML
