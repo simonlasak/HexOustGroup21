@@ -424,12 +424,13 @@ public class hexOustUIController {
 
     if (BoardLogic.isValidMove(c,isRedTurn) == false) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Invalid Move");
-        alert.setHeaderText(null);
-        alert.setContentText("You cannot place a hex here!");
-        alert.showAndWait();
+        //alert.setTitle("Invalid Move");
+        //alert.setHeaderText(null);
+        //alert.setContentText("You cannot place a hex here!");
+        //alert.showAndWait();
         return;
     }
+
 
     BoardLogic.addToList(c, isRedTurn);
     BoardLogic.printLists();

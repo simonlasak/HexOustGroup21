@@ -1,6 +1,7 @@
 package UIPackage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class Point
 {
@@ -106,6 +107,13 @@ class HexCube
         HexCube other = (HexCube) obj;  // Cast the object to HexCube
         return this.q == other.q && this.r == other.r && this.s == other.s;  // Compare q, r, and s
     }
+
+    //java automatically calls this when adding to hashmap
+    @Override
+    public int hashCode() {
+        return Objects.hash(q, r, s);
+    }
+
 }
 
 
