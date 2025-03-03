@@ -6,14 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.RadialGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
-import static java.lang.Math.round;
 import static javafx.scene.paint.Color.*;
 
 public class hexOustUIController {
@@ -402,66 +398,97 @@ public class hexOustUIController {
     @FXML
     private Polygon hex4;
 
+    private final Color baseColor = new Color(0.8627, 0.8627, 0.8627, 1.0);
+    private final Color blueFade = new Color(0, 0, 1, 0.3);
+    private final Color redFade = new Color(1, 0, 0, 0.3);
 
-@FXML
-    void getHexID(MouseEvent event) {
+    private HexCube getCube (MouseEvent event) {
+        //get centerpoint of hexagon clicked
+        double clickX = event.getSceneX();
+        double clickY = event.getSceneY();
+        double eventX = - event.getY();
+        double eventY = event.getX();
+        int centerX = (int) (clickX - eventX/2.0);
+        int centerY = (int) (clickY - eventY/2.0);
 
-    //get centerpoint of hexagon clicked
-    double clickX = event.getSceneX();
-    double clickY = event.getSceneY();
-    double eventX = - event.getY();
-    double eventY = event.getX();
-    int centerX = (int) (clickX - eventX/2.0);
-    int centerY = (int) (clickY - eventY/2.0);
+        //turn the center point into a Point p
+        Point p = new Point(centerX, centerY);
+        //create hexagon with that point p
+        return new HexCube(p);
+    }
 
-    //turn the center point into a Point p
-    Point p = new Point(centerX, centerY);
-    //create hexagon with that point p
-    HexCube c = new HexCube(p);
-
-    //System.out.println(c);
-
-
-    if (BoardLogic.isValidMove(c,isRedTurn) == false) {
+    private void invalidAlert(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        //alert.setTitle("Invalid Move");
-        //alert.setHeaderText(null);
-        //alert.setContentText("You cannot place a hex here!");
-        //alert.showAndWait();
-        return;
+        alert.setTitle("Invalid Move");
+        alert.setHeaderText(null);
+        alert.setContentText("You cannot place a hex here!");
+        alert.showAndWait();
     }
 
 
-    BoardLogic.addToList(c, isRedTurn);
-    BoardLogic.printLists();
+    @FXML
+    void getHexID(MouseEvent event) {
 
-    //this should probably be put in its own method
-    Polygon hexagon = (Polygon) event.getSource();
+        HexCube c = getCube(event);
+        if (!BoardLogic.isValidMove(c, isRedTurn)) {
+            invalidAlert();
+            return;
+        }
+
+        BoardLogic.addToList(c, isRedTurn);
+        BoardLogic.printLists();
+
+        //this should probably be put in its own method
+        Polygon hexagon = (Polygon) event.getSource();
         if (hexagon.getFill() != RED && hexagon.getFill() != BLUE) {
             // Only allow move if hexagon is not occupied
             if (isRedTurn) {
+                hexagon.setOnMouseExited(Hoverevent -> {
+                    hexagon.setStroke(BLACK);
+                    hexagon.setFill(RED);
+                    hexagon.setStrokeWidth(3);// Revert back when mouse leaves
+                });
                 hexagon.setFill(Color.RED);
                 turnIndicator.setText("Blue Player's Turn");
                 turnIndicatorCircle.setFill(Color.BLUE);
             } else {
+                hexagon.setOnMouseExited(Hoverevent -> {
+                    hexagon.setStroke(BLACK);
+                    hexagon.setFill(BLUE);
+                    hexagon.setStrokeWidth(3);// Revert back when mouse leaves
+                });
                 hexagon.setFill(Color.BLUE);
                 turnIndicator.setText("Red Player's Turn");
                 turnIndicatorCircle.setFill(Color.RED);
             }
             isRedTurn = !isRedTurn; // Switch turn
         }
-
     }
 
     @FXML
     void hover(MouseEvent event) {
         Polygon hexagon = (Polygon) event.getSource();
-        hexagon.setStroke(LIGHTSTEELBLUE);
-        hexagon.setStrokeWidth(5);
-        hexagon.setOnMouseExited(Hoverevent -> {
-            hexagon.setStroke(BLACK);
-            hexagon.setStrokeWidth(3);// Revert to blue when mouse leaves
-        });
+
+        HexCube c = getCube(event);
+        if (BoardLogic.isValidMove(c, isRedTurn)) {
+            hexagon.setOnMouseExited(Hoverevent -> {
+                hexagon.setStroke(BLACK);
+                hexagon.setFill(baseColor);
+                hexagon.setStrokeWidth(3);// Revert back when mouse leaves
+            });
+
+            hexagon.setStroke(WHITESMOKE);
+            hexagon.setStrokeWidth(5);
+
+
+            if(isRedTurn && hexagon.getFill() != RED && hexagon.getFill() != BLUE) {
+                hexagon.setFill(redFade);
+            }
+            else if(!isRedTurn && hexagon.getFill() != RED && hexagon.getFill() != BLUE) {
+                hexagon.setFill(blueFade);
+            }
+
+        }
     }
 
     @FXML

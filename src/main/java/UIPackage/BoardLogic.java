@@ -10,9 +10,6 @@ public class BoardLogic {
     //private static List<HexCube> blueHexagons = new ArrayList<>();
 
 
-    private static List<Map<HexCube, String>> redGroups = new ArrayList<>();
-    private static List<Map<HexCube, String>> blueGroups = new ArrayList<>();
-
     private static HashMap<HexCube, Integer> redHexagons = new HashMap<>();
     private static HashMap<HexCube, Integer> blueHexagons = new HashMap<>();
 
