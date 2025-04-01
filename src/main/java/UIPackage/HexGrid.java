@@ -42,6 +42,19 @@ class HexCube
     public final int r;
     public final int s;
 
+    //tried reversing above to give a getpointfromHexcube
+    public Point getPointFromHexCube(int q, int r, int s) {
+        if (q + r + s != 0) {
+            throw new IllegalArgumentException("q + r + s must be 0");
+        }
+        int x = 300 + 37 * q;
+        int y = 300 + 22 * (q + 2 * r);
+        return new Point(x, y);
+    }
+
+
+
+
     public HexCube add(HexCube b)
     {
         return new HexCube(q + b.q, r + b.r, s + b.s);

@@ -430,11 +430,12 @@ public class hexOustUIController {
     void getHexID(MouseEvent event) {
 
         HexCube c = getCube(event);
+        /*
         if (!BoardLogic.isValidMove(c, isRedTurn)) {
             invalidAlert();
             return;
         }
-
+        */
         BoardLogic.addToList(c, isRedTurn);
         BoardLogic.printLists();
 
