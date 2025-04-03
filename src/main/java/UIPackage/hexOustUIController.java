@@ -5,6 +5,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -398,9 +400,36 @@ public class hexOustUIController {
     @FXML
     private Polygon hex4;
 
-    private final Color baseColor = new Color(0.8627, 0.8627, 0.8627, 1.0);
+    private static final Color baseColor = new Color(0.8627, 0.8627, 0.8627, 1.0);
     private final Color blueFade = new Color(0, 0, 1, 0.3);
     private final Color redFade = new Color(1, 0, 0, 0.3);
+    public static int centerX;
+    public static int centerY;
+
+    @FXML
+    private AnchorPane hexagonPane; // Reference to the Pane from SceneBuilder
+
+    private static hexOustUIController instance; // Static reference
+
+    @FXML
+    public void initialize() {
+        instance = this; // Store the instance when JavaFX initializes
+    }
+
+    // Method to repaint a hexagon at a given layout position
+    public static void repaintToBase(int layoutX, int layoutY) {
+        //System.out.println("x: " + layoutX + ", y:" + layoutY);
+        for (var node : instance.hexagonPane.getChildren()) {
+            if (node instanceof Polygon poly) {
+                //System.out.println("polyX: " + poly.getLayoutX() + ", polyY" + poly.getLayoutY());
+                if (poly.getLayoutX() == layoutX && poly.getLayoutY() == layoutY) {
+                    //System.out.println(layoutX + " " + layoutY);
+                    poly.setFill(baseColor); // Change color
+                    return;
+                }
+            }
+        }
+    }
 
     private HexCube getCube (MouseEvent event) {
         //get centerpoint of hexagon clicked
@@ -408,11 +437,12 @@ public class hexOustUIController {
         double clickY = event.getSceneY();
         double eventX = - event.getY();
         double eventY = event.getX();
-        int centerX = (int) (clickX - eventX/2.0);
-        int centerY = (int) (clickY - eventY/2.0);
+        centerX = (int) (clickX - eventX/2.0);
+        centerY = (int) (clickY - eventY/2.0);
 
         //turn the center point into a Point p
         Point p = new Point(centerX, centerY);
+
         //create hexagon with that point p
         return new HexCube(p);
     }
@@ -428,14 +458,13 @@ public class hexOustUIController {
 
     @FXML
     void getHexID(MouseEvent event) {
-
         HexCube c = getCube(event);
-        /*
+
         if (!BoardLogic.isValidMove(c, isRedTurn)) {
             invalidAlert();
             return;
         }
-        */
+
         BoardLogic.addToList(c, isRedTurn);
         BoardLogic.printLists();
 

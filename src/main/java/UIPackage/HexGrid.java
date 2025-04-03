@@ -34,6 +34,8 @@ class HexCube
         this.q = q;
         this.r = r;
         this.s = s;
+
+        //System.out.println(centerX + centerY);
         if (q + r + s != 0)
             throw new IllegalArgumentException("q + r + s must be 0");
     }
@@ -43,12 +45,12 @@ class HexCube
     public final int s;
 
     //tried reversing above to give a getpointfromHexcube
-    public Point getPointFromHexCube(int q, int r, int s) {
-        if (q + r + s != 0) {
+    public static Point getPointFromHexCube(HexCube c) {
+        if (c.q + c.r + c.s != 0) {
             throw new IllegalArgumentException("q + r + s must be 0");
         }
-        int x = 300 + 37 * q;
-        int y = 300 + 22 * (q + 2 * r);
+        int x = 300 + 37 * c.q;
+        int y = 300 + 22 * (c.q + 2 * c.r);
         return new Point(x, y);
     }
 

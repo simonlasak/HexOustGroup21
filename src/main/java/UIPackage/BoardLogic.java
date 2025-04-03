@@ -25,14 +25,23 @@ public class BoardLogic {
         }
         List<HexCube> neighbours = c.getAllNeighbours();
 
+        if(canCapture(c, isRedTurn)) {
+            //System.out.println("iscapturing");
+            return true;
+        }
+        //if (isCapturing) System.out.println("isCapturing");
+
+        //fix this--place a hexagon next to same colors only in the case when it is a capturing move
         for (HexCube neighbour : neighbours) {
-            if ((isRedTurn && redHexagons.containsKey(neighbour)) ||
-                    (!isRedTurn && blueHexagons.containsKey(neighbour))) {
+            if (((isRedTurn && redHexagons.containsKey(neighbour)) ||
+                    (!isRedTurn && blueHexagons.containsKey(neighbour)))) {
                 return false;
             }
         }
 
-        return canCapture(c, isRedTurn);
+        //no need to check for capturing if hex has no samecolor neighbor
+
+        return true;
     }
 
     public static void printLists() {
@@ -42,15 +51,36 @@ public class BoardLogic {
     private static boolean canCapture(HexCube c, boolean isRedTurn) {
         List<HexCube> neighbours = c.getAllNeighbours();
         int ownGroupSize = getGroupSize(c, isRedTurn);
-        int opponentGroupSize = 0;
 
+        //this ensures no same group is counted multiple times
+        List<Integer> groupNumbers = new ArrayList<>();
+        HashMap<HexCube, Integer> opponentMap = isRedTurn ? blueHexagons : redHexagons;
+
+        //collect all group numbers
         for (HexCube neighbour : neighbours) {
-            if ((isRedTurn && blueHexagons.containsKey(neighbour)) ||
-                    (!isRedTurn && redHexagons.containsKey(neighbour))) {
-                opponentGroupSize += getGroupSize(neighbour, !isRedTurn);
+            if (opponentMap.containsKey(neighbour)) {
+                groupNumbers.add(opponentMap.get(neighbour));
             }
         }
 
+        //remove duplicates
+        List<Integer> uniqueGroups = removeDuplicates(groupNumbers);
+        //System.out.println(uniqueGroups);
+
+        //calculate total opponent size
+        int opponentGroupSize = 0;
+        for (Integer groupNum : uniqueGroups) {
+            //we only need to get size of one hex from each group
+            for (HexCube hex : opponentMap.keySet()) {
+                if (opponentMap.get(hex) == groupNum) {
+                    int currentGroupSize = getGroupSize(hex, !isRedTurn);
+                    opponentGroupSize = Math.max(opponentGroupSize, currentGroupSize);
+                    break; //found one hex from this group, terminate inner loop
+                }
+            }
+        }
+
+        if (opponentGroupSize == 0) return false;
         return ownGroupSize > opponentGroupSize;
     }
 
@@ -69,14 +99,20 @@ public class BoardLogic {
         }
 
         for (HexCube hex : toRemove) {
+            repaintHexagons(hex);
             if (isRedTurn) {
                 blueHexagons.remove(hex);
-
             } else {
                 redHexagons.remove(hex);
             }
         }
     }
+
+    public static void repaintHexagons(HexCube c) {
+        Point p = HexCube.getPointFromHexCube(c);
+        hexOustUIController.repaintToBase((int)p.x, (int)p.y);
+    }
+
 
     private static List<HexCube> getGroup(HexCube start, boolean isRed) {
         HashMap<HexCube, Integer> map = isRed ? redHexagons : blueHexagons;
