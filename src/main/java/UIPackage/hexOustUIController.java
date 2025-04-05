@@ -471,27 +471,23 @@ public class hexOustUIController {
         //this should probably be put in its own method
         Polygon hexagon = (Polygon) event.getSource();
         if (hexagon.getFill() != RED && hexagon.getFill() != BLUE) {
-            // Only allow move if hexagon is not occupied
+            //only allow move if hexagon is not occupied
+            Color permanentColor = isRedTurn ? RED : BLUE;
+            hexagon.setFill(permanentColor);
+            hexagon.setStroke(BLACK);
+            hexagon.setStrokeWidth(3);
+
+            //remove the hover behavior for occupied hexagons
+            hexagon.setOnMouseExited(null);
+
             if (isRedTurn) {
-                hexagon.setOnMouseExited(Hoverevent -> {
-                    hexagon.setStroke(BLACK);
-                    hexagon.setFill(RED);
-                    hexagon.setStrokeWidth(3);// Revert back when mouse leaves
-                });
-                hexagon.setFill(Color.RED);
                 turnIndicator.setText("Blue Player's Turn");
                 turnIndicatorCircle.setFill(Color.BLUE);
             } else {
-                hexagon.setOnMouseExited(Hoverevent -> {
-                    hexagon.setStroke(BLACK);
-                    hexagon.setFill(BLUE);
-                    hexagon.setStrokeWidth(3);// Revert back when mouse leaves
-                });
-                hexagon.setFill(Color.BLUE);
                 turnIndicator.setText("Red Player's Turn");
                 turnIndicatorCircle.setFill(Color.RED);
             }
-            isRedTurn = !isRedTurn; // Switch turn
+            isRedTurn = !isRedTurn; //switch turn
         }
     }
 
@@ -499,25 +495,31 @@ public class hexOustUIController {
     void hover(MouseEvent event) {
         Polygon hexagon = (Polygon) event.getSource();
 
+        //skip hover effects for already occupied hexagons
+        if (hexagon.getFill() == RED || hexagon.getFill() == BLUE) {
+            return;
+        }
+
         HexCube c = getCube(event);
         if (BoardLogic.isValidMove(c, isRedTurn)) {
-            hexagon.setOnMouseExited(Hoverevent -> {
-                hexagon.setStroke(BLACK);
-                hexagon.setFill(baseColor);
-                hexagon.setStrokeWidth(3);// Revert back when mouse leaves
-            });
+            final Color previousFill = (Color) hexagon.getFill();
 
             hexagon.setStroke(WHITESMOKE);
             hexagon.setStrokeWidth(5);
 
-
-            if(isRedTurn && hexagon.getFill() != RED && hexagon.getFill() != BLUE) {
+            //set the appropriate hover color
+            if (isRedTurn) {
                 hexagon.setFill(redFade);
-            }
-            else if(!isRedTurn && hexagon.getFill() != RED && hexagon.getFill() != BLUE) {
+            } else {
                 hexagon.setFill(blueFade);
             }
 
+            //set the onMouseExited to restore the previous state
+            hexagon.setOnMouseExited(exitEvent -> {
+                hexagon.setStroke(BLACK);
+                hexagon.setFill(previousFill);
+                hexagon.setStrokeWidth(3);
+            });
         }
     }
 
