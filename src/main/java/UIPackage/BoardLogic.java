@@ -48,6 +48,17 @@ public class BoardLogic {
         System.out.println("Red Hexagons: " + redHexagons + "\nBlue Hexagons: " + blueHexagons);
     }
 
+    public static int listSize(boolean isRedTurn) {
+        if (isRedTurn){
+            return blueHexagons.size();
+        }
+        else{
+            return redHexagons.size();
+        }
+    }
+
+
+
     private static boolean canCapture(HexCube c, boolean isRedTurn) {
         // simulate temporary placement
         HashMap<HexCube, Integer> ownMap = isRedTurn ? redHexagons : blueHexagons;

@@ -465,6 +465,10 @@ public class hexOustUIController {
             return;
         }
 
+        //this gets the number of opposite colour hexagons
+        int oppColourSize = BoardLogic.listSize(isRedTurn);
+        //if this changes I know a capturing move happened
+
         BoardLogic.addToList(c, isRedTurn);
         BoardLogic.printLists();
 
@@ -480,14 +484,22 @@ public class hexOustUIController {
             //remove the hover behavior for occupied hexagons
             hexagon.setOnMouseExited(null);
 
-            if (isRedTurn) {
+            //if the number of opposite hexagons changes, a capturing move happened
+            if (oppColourSize == BoardLogic.listSize(isRedTurn)){
+                isRedTurn = !isRedTurn;  //switch turn
+            }
+            if (oppColourSize != BoardLogic.listSize(isRedTurn)){
+                //do nothing
+            }
+
+            if (!isRedTurn) {
                 turnIndicator.setText("Blue Player's Turn");
                 turnIndicatorCircle.setFill(Color.BLUE);
             } else {
                 turnIndicator.setText("Red Player's Turn");
                 turnIndicatorCircle.setFill(Color.RED);
             }
-            isRedTurn = !isRedTurn; //switch turn
+
         }
     }
 
