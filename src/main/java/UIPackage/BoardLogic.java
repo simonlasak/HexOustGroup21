@@ -195,4 +195,9 @@ public class BoardLogic {
     public static List<Integer> removeDuplicates(List<Integer> list) {
         return new ArrayList<>(new HashSet<>(list));
     }
+
+    public static void clearBoard() {
+        redHexagons.clear();
+        blueHexagons.clear();
+    }
 }
