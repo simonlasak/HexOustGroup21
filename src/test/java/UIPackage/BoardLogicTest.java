@@ -28,8 +28,8 @@ class BoardLogicTest {
     @Test
     void testAddToListIncreasesRedSize() {
         HexCube move = new HexCube(new Point(300, 300));
-        int before = BoardLogic.redHexagon;
-        BoardLogic.addToList(move, true);
+        int before = BoardLogic.redHexagons.size();
+        BoardLogic.addToList(move, false);
         assertEquals(before + 1, BoardLogic.listSize(true));
     }
 }
