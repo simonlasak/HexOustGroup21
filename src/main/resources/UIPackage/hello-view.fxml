@@ -2,16 +2,20 @@
 
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="hexagonPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UIPackage.hexOustUIController">
    <children>
-      <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#exit" prefHeight="30.0" prefWidth="67.0" text="EXIT">
+      <Button focusTraversable="false" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#exit" prefHeight="30.0" prefWidth="67.0" text="EXIT">
          <font>
             <Font size="15.0" />
          </font>
+         <effect>
+            <Blend mode="DARKEN" />
+         </effect>
       </Button>
       <Polygon fx:id="hex05" fill="#dcdcdc" layoutX="263.0" layoutY="322.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
          <points>
