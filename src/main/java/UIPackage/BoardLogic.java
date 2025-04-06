@@ -7,6 +7,7 @@ public class BoardLogic {
     static HashMap<HexCube, Integer> redHexagons = new HashMap<>();
     static HashMap<HexCube, Integer> blueHexagons = new HashMap<>();
     private static int nextGroupNumber = 0;
+    public static boolean testMode = false;
 
     public static void addToList(HexCube c, boolean isRedTurn) {
         int groupNumber = findGroupNumber(c, isRedTurn);
@@ -120,6 +121,8 @@ public class BoardLogic {
 
 
     public static void repaintHexagons(HexCube c) {
+        if (testMode) return; //this is for skipping ui during test cases
+
         Point p = HexCube.getPointFromHexCube(c);
         hexOustUIController.repaintToBase((int)p.x, (int)p.y);
     }
