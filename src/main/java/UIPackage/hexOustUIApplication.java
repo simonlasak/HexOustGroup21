@@ -14,6 +14,7 @@ public class hexOustUIApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
         stage.setTitle("Group 21");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

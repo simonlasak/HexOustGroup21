@@ -9,6 +9,16 @@ public class BoardLogic {
     private static int nextGroupNumber = 0;
     public static boolean testMode = false;
 
+    public static boolean checkGameWon(boolean isRedTurn) {
+        //a game can only be won when the current player has 2 or more hexagons and the opponent 0
+        if (isRedTurn && BoardLogic.blueHexagons.isEmpty() && (BoardLogic.redHexagons.size() >= 2)) {
+            return true;
+        } else if (!isRedTurn && BoardLogic.redHexagons.isEmpty() && (BoardLogic.blueHexagons.size() >= 2)) {
+            return true;
+        }
+        return false;
+    }
+
     public static void addToList(HexCube c, boolean isRedTurn) {
         int groupNumber = findGroupNumber(c, isRedTurn);
         if (isRedTurn) {
