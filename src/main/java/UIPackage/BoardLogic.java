@@ -1,6 +1,5 @@
 package UIPackage;
 import java.util.*;
-import javafx.scene.paint.Color;
 
 public class BoardLogic {
     //these were private but for junit testing, we have removed the private
