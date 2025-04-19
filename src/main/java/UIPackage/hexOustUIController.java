@@ -412,10 +412,7 @@ public class hexOustUIController {
     private static final Color baseColor = new Color(0.8627, 0.8627, 0.8627, 1.0);
     private final Color blueFade = new Color(0, 0, 1, 0.3);
     private final Color redFade = new Color(1, 0, 0, 0.3);
-    public static int centerX;
-    public static int centerY;
     private static final Duration BOUNCE_DURATION = Duration.millis(169);
-    private List<Polygon> winningHexagons = new ArrayList<>();
 
     // Field to track if an animation is in progress
     private boolean animationInProgress = false;
@@ -449,8 +446,8 @@ public class hexOustUIController {
         double clickY = event.getSceneY();
         double eventX = - event.getY();
         double eventY = event.getX();
-        centerX = (int) (clickX - eventX/2.0);
-        centerY = (int) (clickY - eventY/2.0);
+        int centerX = (int) (clickX - eventX/2.0);
+        int centerY = (int) (clickY - eventY/2.0);
 
         //turn the center point into a Point p
         Point p = new Point(centerX, centerY);
