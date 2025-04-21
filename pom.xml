@@ -31,27 +31,26 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
-            <classifier>win</classifier> <!-- Use win, linux, or mac according to your OS -->
+            <classifier>linux</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>${javafx.version}</version>
-            <classifier>win</classifier>
+            <classifier>linux</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
-            <classifier>win</classifier>
+            <classifier>linux</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
             <version>${javafx.version}</version>
-            <classifier>win</classifier>
+            <classifier>linux</classifier>
         </dependency>
-        <!-- Testing dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -90,6 +89,7 @@
                 <version>3.5.1</version>
                 <executions>
                     <execution>
+                        <id>shade-all</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
@@ -109,8 +109,6 @@
                                 </transformer>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                             </transformers>
-                            <!--<minimizeJar>true</minimizeJar>-->
-                            <!-- Add filters to specifically include what you need -->
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>
@@ -124,9 +122,58 @@
                                     </excludes>
                                 </filter>
                             </filters>
-                            <!-- Add JavaFX launcher setup -->
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <shadedClassifierName>launcher</shadedClassifierName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-reduced-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>${project.groupId}:${project.artifactId}:${project.version}</include>
+                                    <include>org.openjfx:javafx-controls</include>
+                                    <include>org.openjfx:javafx-fxml</include>
+                                    <include>org.openjfx:javafx-graphics</include>
+                                    <include>org.openjfx:javafx-base</include>
+                                </includes>
+                            </artifactSet>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>UIPackage.Launcher</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>org.openjfx:javafx-*</artifact>
+                                    <includes>
+                                        <include>**/*.class</include>
+                                    </includes>
+                                </filter>
+                                <filter>
+                                    <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
+                                    <excludes>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>META-INF/LICENSE*</exclude>
+                                        <exclude>META-INF/NOTICE*</exclude>
+                                        <exclude>META-INF/maven/**</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>reduced</shadedClassifierName>
                         </configuration>
                     </execution>
                 </executions>
