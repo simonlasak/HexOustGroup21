@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="hexagonPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UIPackage.hexOustUIController">
    <children>
-      <Button focusTraversable="false" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#exit" prefHeight="30.0" prefWidth="67.0" text="EXIT">
+      <Button focusTraversable="false" layoutX="35.0" layoutY="36.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#exit" prefHeight="30.0" prefWidth="67.0" text="EXIT">
          <font>
             <Font size="15.0" />
          </font>
@@ -2035,7 +2035,7 @@
          </points>
       </Polygon>
 
-      <Label fx:id="turnIndicator" layoutX="445" layoutY="38" style="-fx-font-size: 18px;" text="Red Player's Turn" />
-      <Circle fx:id="turnIndicatorCircle" fill="RED" layoutX="430" layoutY="50" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="turnIndicator" layoutX="445.0" layoutY="38" style="-fx-font-size: 18px;" text="Red Player's Turn" />
+      <Circle fx:id="turnIndicatorCircle" fill="RED" layoutX="433.0" layoutY="52.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

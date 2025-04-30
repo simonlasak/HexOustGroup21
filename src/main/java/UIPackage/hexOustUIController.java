@@ -1,11 +1,15 @@
 package UIPackage;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
@@ -13,9 +17,12 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.animation.*;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -513,11 +520,199 @@ public class hexOustUIController {
      * Displays an alert dialog when a player attempts an invalid move.
      */
     private void invalidAlert() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Invalid Move");
-        alert.setHeaderText(null);
-        alert.setContentText("You cannot place a hex here!");
-        alert.showAndWait();
+        Stage parentStage = (Stage) hexagonPane.getScene().getWindow();
+        CustomErrorDialog.show("You cannot place a hex here!", parentStage, isRedTurn);
+    }
+
+    /**
+     * Custom error dialog for the HexOust game.
+     * Provides a styled alternative to the standard JavaFX Alert dialog.
+     * Colors adjust based on the current player's turn.
+     */
+    public class CustomErrorDialog {
+
+        /**
+         * Shows a custom error dialog with the specified message.
+         *
+         * @param message The error message to display
+         * @param parentStage The parent stage for this dialog
+         * @param isRedTurn Flag indicating if it's red player's turn
+         */
+        public static void show(String message, Stage parentStage, boolean isRedTurn) {
+            // Define theme colors based on current player
+            Color playerColor = isRedTurn ? Color.RED : Color.BLUE;
+            Color playerColorDark = isRedTurn ? Color.color(0.7, 0, 0) : Color.color(0, 0, 0.7);
+
+            // Convert colors to hex format for CSS
+            String hexColor = String.format("#%02X%02X%02X",
+                    (int)(playerColor.getRed() * 255),
+                    (int)(playerColor.getGreen() * 255),
+                    (int)(playerColor.getBlue() * 255));
+
+            String darkHexColor = String.format("#%02X%02X%02X",
+                    (int)(playerColorDark.getRed() * 255),
+                    (int)(playerColorDark.getGreen() * 255),
+                    (int)(playerColorDark.getBlue() * 255));
+
+            // Define button styles for normal and hover states
+            String buttonStyleNormal = "-fx-background-color: " + hexColor + ";" +
+                    "-fx-text-fill: white;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-font-size: 14px;" +
+                    "-fx-background-radius: 15;" +
+                    "-fx-border-color: white;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-border-radius: 15;" +
+                    "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1);";
+
+            String buttonStyleHover = "-fx-background-color: " + darkHexColor + ";" +
+                    "-fx-text-fill: white;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-font-size: 14px;" +
+                    "-fx-background-radius: 15;" +
+                    "-fx-border-color: white;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-border-radius: 15;" +
+                    "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 8, 0.0, 0, 2);";
+
+            // Create a new stage for the dialog
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initStyle(StageStyle.TRANSPARENT);
+            dialogStage.initOwner(parentStage);
+
+            // Create a hexagon shape as background decoration
+            Polygon hexBackground = createHexBackground(playerColor);
+
+            // Create the error icon (or use a hexagon as error icon)
+            Polygon errorIcon = createErrorIcon(playerColor);
+
+            // Create the message label
+            Label messageLabel = new Label(message);
+            messageLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+            messageLabel.setTextFill(BLACK);
+            messageLabel.setWrapText(true);
+            messageLabel.setMaxWidth(250);
+            messageLabel.setAlignment(Pos.CENTER);
+            messageLabel.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+
+            // Create the OK button with enhanced styling
+            Button okButton = new Button("OK");
+            okButton.setStyle(buttonStyleNormal);
+            okButton.setPrefWidth(100);
+            okButton.setPrefHeight(30);
+
+            // Add hover effects
+            okButton.setOnMouseEntered(e -> okButton.setStyle(buttonStyleHover));
+            okButton.setOnMouseExited(e -> okButton.setStyle(buttonStyleNormal));
+
+            okButton.setOnAction(e -> dialogStage.close());
+
+            // Create the content layout using VBox
+            VBox content = new VBox(15);
+            content.setAlignment(Pos.CENTER);
+            content.setStyle("-fx-background-color: transparent;");
+            content.setPadding(new javafx.geometry.Insets(10, 15, 10, 15));
+            content.getChildren().addAll(errorIcon, messageLabel, okButton);
+
+            // Create main layout that includes the hex background and content
+            javafx.scene.layout.StackPane layout = new javafx.scene.layout.StackPane();
+            layout.getChildren().addAll(hexBackground, content);
+            layout.setStyle("-fx-background-color: transparent;");
+
+            // Create and configure the scene
+            Scene scene = new Scene(layout, 300, 300);
+            scene.setFill(Color.TRANSPARENT);
+
+            // Configure and show the dialog
+            dialogStage.setScene(scene);
+
+            // Center on parent stage
+            dialogStage.setOnShown(e -> {
+                dialogStage.setX(parentStage.getX() + parentStage.getWidth()/2 - dialogStage.getWidth()/2);
+                dialogStage.setY(parentStage.getY() + parentStage.getHeight()/2 - dialogStage.getHeight()/2);
+
+                // Play entry animation
+                playEntryAnimation(layout);
+            });
+
+            dialogStage.showAndWait();
+        }
+
+        /**
+         * Creates a hexagon shape for the dialog background.
+         *
+         * @param playerColor The current player's color
+         * @return The styled hexagon polygon
+         */
+        private static Polygon createHexBackground(Color playerColor) {
+            Polygon hexagon = new Polygon();
+            double centerX = 150;
+            double centerY = 100;
+            double radius = 120;
+
+            for (int i = 0; i < 6; i++) {
+                double angle = 2.0 * Math.PI / 6 * i;
+                hexagon.getPoints().add(centerX + radius * Math.cos(angle));
+                hexagon.getPoints().add(centerY + radius * Math.sin(angle));
+            }
+
+            hexagon.setFill(Color.color(1, 1, 1, 0.9));
+            hexagon.setStroke(playerColor);
+            hexagon.setStrokeWidth(4);
+
+            DropShadow dropShadow = new DropShadow();
+            dropShadow.setColor(Color.color(0, 0, 0, 0.7));
+            dropShadow.setRadius(20);
+            hexagon.setEffect(dropShadow);
+
+            return hexagon;
+        }
+
+        /**
+         * Creates a smaller hexagon to use as an error icon.
+         *
+         * @param playerColor The current player's color
+         * @return The styled error icon hexagon
+         */
+        private static Polygon createErrorIcon(Color playerColor) {
+            Polygon errorHex = new Polygon();
+            double centerX = 0;
+            double centerY = 0;
+            double radius = 30;
+
+            for (int i = 0; i < 6; i++) {
+                double angle = 2.0 * Math.PI / 6 * i;
+                errorHex.getPoints().add(centerX + radius * Math.cos(angle));
+                errorHex.getPoints().add(centerY + radius * Math.sin(angle));
+            }
+
+            errorHex.setFill(playerColor);
+            errorHex.setStroke(Color.BLACK);
+            errorHex.setStrokeWidth(2);
+
+            return errorHex;
+        }
+
+        /**
+         * Creates and plays an entry animation for the dialog.
+         *
+         * @param node The node to animate
+         */
+        private static void playEntryAnimation(javafx.scene.Node node) {
+            ScaleTransition scale = new ScaleTransition(Duration.millis(200), node);
+            scale.setFromX(0.1);
+            scale.setFromY(0.1);
+            scale.setToX(1.0);
+            scale.setToY(1.0);
+
+            FadeTransition fade = new FadeTransition(Duration.millis(200), node);
+            fade.setFromValue(0.0);
+            fade.setToValue(1.0);
+
+            ParallelTransition parallel = new ParallelTransition(scale, fade);
+            parallel.play();
+        }
     }
 
     /**
@@ -709,8 +904,9 @@ public class hexOustUIController {
         ParallelTransition textAnimation = createVictoryTextAnimation(victoryText);
         parallelAnimations.getChildren().add(textAnimation);
 
-        Button resetButton = createResetButton(waveCircle, victoryText);
-        Button quitButton = createQuitButton();
+        // Pass isRedWinner to button creation methods
+        Button resetButton = createResetButton(waveCircle, victoryText, isRedWinner);
+        Button quitButton = createQuitButton(isRedWinner);
 
         hexagonPane.getChildren().addAll(resetButton, quitButton);
 
@@ -868,13 +1064,67 @@ public class hexOustUIController {
      *
      * @param waveCircle The wave circle to remove when resetting
      * @param victoryText The victory text to remove when resetting
+     * @param isRedWinner Whether red player is the winner
      * @return The configured button
      */
-    private Button createResetButton(Circle waveCircle, Text victoryText) {
+    private Button createResetButton(Circle waveCircle, Text victoryText, boolean isRedWinner) {
         Button resetButton = new Button("Play Again");
-        resetButton.setLayoutX(262.5);
+
+        // Set positioning
+        resetButton.setLayoutX(250);
         resetButton.setLayoutY(350);
         resetButton.setOpacity(0);
+
+        // Set size
+        resetButton.setPrefWidth(100);
+        resetButton.setPrefHeight(30);
+
+        // Set styling based on winner's color
+        Color buttonColor = isRedWinner ? Color.RED : Color.BLUE;
+        String hexColor = String.format("#%02X%02X%02X",
+                (int)(buttonColor.getRed() * 255),
+                (int)(buttonColor.getGreen() * 255),
+                (int)(buttonColor.getBlue() * 255));
+
+        // Apply styled CSS
+        resetButton.setStyle(
+                "-fx-background-color: " + "white" + ";" +
+                        "-fx-text-fill: black;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-font-size: 14px;" +
+                        "-fx-background-radius: 60;" + // Rounded corners
+                        "-fx-border-color: black;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-border-radius: 15;" +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1);"
+        );
+
+        // Add hover effect
+        resetButton.setOnMouseEntered(e -> resetButton.setStyle(
+                "-fx-background-color: " + hexColor + ";" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-font-size: 14px;" +
+                        "-fx-background-radius: 60;" +
+                        "-fx-border-color: white;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-border-radius: 15;" +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 8, 0.0, 0, 2);"
+        ));
+
+        resetButton.setOnMouseExited(e -> resetButton.setStyle(
+                "-fx-background-color: " + "white" + ";" +
+                        "-fx-text-fill: black;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-font-size: 14px;" +
+                        "-fx-background-radius: 60;" +
+                        "-fx-border-color: black;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-border-radius: 15;" +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1);"
+        ));
+
+        // Set action
         resetButton.setOnAction(event -> {
             resetGame();
             hexagonPane.getChildren().removeAll(
@@ -884,24 +1134,80 @@ public class hexOustUIController {
                     waveCircle
             );
         });
+
         return resetButton;
     }
 
     /**
-     * Creates the quit button for the victory screen.
+     * Creates the quit button for the victory screen with enhanced styling.
      *
+     * @param isRedWinner Whether red player is the winner
      * @return The configured button
      */
-    private Button createQuitButton() {
+    private Button createQuitButton(boolean isRedWinner) {
         Button quitButton = new Button("Quit");
         quitButton.setId("quitButton");
-        quitButton.setLayoutX(280);
-        quitButton.setLayoutY(380);
+
+        // Set positioning - adjusted to be centered horizontally
+        quitButton.setLayoutX(250);
+        quitButton.setLayoutY(390);
         quitButton.setOpacity(0);
+
+        // Set size
+        quitButton.setPrefWidth(100);
+        quitButton.setPrefHeight(30);
+
+        // Set styling based on winner's color
+        Color buttonColor = isRedWinner ? Color.RED : Color.BLUE;
+        String hexColor = String.format("#%02X%02X%02X",
+                (int)(buttonColor.getRed() * 255),
+                (int)(buttonColor.getGreen() * 255),
+                (int)(buttonColor.getBlue() * 255));
+
+        // Apply styled CSS
+        quitButton.setStyle(
+                "-fx-background-color: " + "white" + ";" +
+                        "-fx-text-fill: black;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-font-size: 14px;" +
+                        "-fx-background-radius: 60;" + // Rounded corners
+                        "-fx-border-color: black;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-border-radius: 15;" +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1);"
+        );
+
+        // Add hover effect
+        quitButton.setOnMouseEntered(e -> quitButton.setStyle(
+                "-fx-background-color: " + hexColor + ";" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-font-size: 14px;" +
+                        "-fx-background-radius: 60;" +
+                        "-fx-border-color: white;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-border-radius: 15;" +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 8, 0.0, 0, 2);"
+        ));
+
+        quitButton.setOnMouseExited(e -> quitButton.setStyle(
+                "-fx-background-color: " + "white" + ";" +
+                        "-fx-text-fill: black;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-font-size: 14px;" +
+                        "-fx-background-radius: 60;" +
+                        "-fx-border-color: black;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-border-radius: 15;" +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1);"
+        ));
+
+        // Set action
         quitButton.setOnAction(event -> {
             Stage stage = (Stage) quitButton.getScene().getWindow();
             stage.close();
         });
+
         return quitButton;
     }
 
