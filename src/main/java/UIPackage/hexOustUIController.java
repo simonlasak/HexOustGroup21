@@ -23,6 +23,10 @@ import java.util.List;
 
 import static javafx.scene.paint.Color.*;
 
+/**
+ * Controller class for the HexOust game user interface.
+ * Handles UI events, animations, and game state management for the hexagonal board game.
+ */
 public class hexOustUIController {
 
     @FXML
@@ -409,54 +413,106 @@ public class hexOustUIController {
     @FXML
     private Polygon hex4;
 
+    /**
+     * Base color for unoccupied hexagon tiles.
+     */
     private static final Color baseColor = new Color(0.8627, 0.8627, 0.8627, 1.0);
+
+    /**
+     * Semi-transparent blue color used for hover effects.
+     */
     private final Color blueFade = new Color(0, 0, 1, 0.3);
+
+    /**
+     * Semi-transparent red color used for hover effects.
+     */
     private final Color redFade = new Color(1, 0, 0, 0.3);
+
+    /**
+     * Duration for bounce animation effects on hexagons.
+     */
     private static final Duration BOUNCE_DURATION = Duration.millis(169);
 
-    // Field to track if an animation is in progress
+    /**
+     * Flag to track if an animation is currently in progress.
+     */
     private boolean animationInProgress = false;
 
+    /**
+     * Reference to the main pane containing all hexagon tiles.
+     */
     @FXML
-    private AnchorPane hexagonPane; // Reference to the Pane from SceneBuilder
+    private AnchorPane hexagonPane;
 
-    private static hexOustUIController instance; // Static reference
+    /**
+     * Static reference to the controller instance.
+     */
+    private static hexOustUIController instance;
 
+    /**
+     * Label displaying the current player's turn.
+     */
+    @FXML
+    private Label turnIndicator;
+
+    /**
+     * Flag tracking which player's turn it is (true = Red, false = Blue).
+     */
+    private boolean isRedTurn = true;
+
+    /**
+     * Circle that indicates current player's turn.
+     */
+    @FXML
+    private Circle turnIndicatorCircle;
+
+    /**
+     * Initialize the controller when the FXML is loaded.
+     */
     @FXML
     public void initialize() {
-        instance = this; // Store the instance when JavaFX initializes
+        instance = this;
     }
 
-    // Method to repaint a hexagon at a given layout position
+    /**
+     * Repaints a hexagon at the specified layout position to the base color.
+     *
+     * @param layoutX The x-coordinate of the hexagon to repaint
+     * @param layoutY The y-coordinate of the hexagon to repaint
+     */
     public static void repaintToBase(int layoutX, int layoutY) {
         for (var node : instance.hexagonPane.getChildren()) {
             if (node instanceof Polygon poly) {
                 if (poly.getLayoutX() == layoutX && poly.getLayoutY() == layoutY) {
-                    poly.setFill(baseColor); // Change color
+                    poly.setFill(baseColor);
                     return;
                 }
             }
         }
     }
 
-
-    private HexCube getCube (MouseEvent event) {
-        //get centerpoint of hexagon clicked
+    /**
+     * Converts mouse event coordinates to hex cube coordinates.
+     *
+     * @param event The mouse event containing click coordinates
+     * @return A HexCube object representing the clicked hexagon
+     */
+    private HexCube getCube(MouseEvent event) {
         double clickX = event.getSceneX();
         double clickY = event.getSceneY();
-        double eventX = - event.getY();
+        double eventX = -event.getY();
         double eventY = event.getX();
         int centerX = (int) (clickX - eventX/2.0);
         int centerY = (int) (clickY - eventY/2.0);
 
-        //turn the center point into a Point p
         Point p = new Point(centerX, centerY);
-
-        //create hexagon with that point p
         return new HexCube(p);
     }
 
-    private void invalidAlert(){
+    /**
+     * Displays an alert dialog when a player attempts an invalid move.
+     */
+    private void invalidAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Invalid Move");
         alert.setHeaderText(null);
@@ -464,47 +520,51 @@ public class hexOustUIController {
         alert.showAndWait();
     }
 
-    // Modified applyBounceEffect with no callback needed
+    /**
+     * Applies a bounce animation effect to a hexagon when it's clicked.
+     *
+     * @param hexagon The hexagon polygon to animate
+     */
     private void applyBounceEffect(Polygon hexagon) {
-        // Prevent multiple animations running at once
         if (animationInProgress) return;
-
         animationInProgress = true;
 
-        // Create scale down animation
-        ScaleTransition scaleDown = new ScaleTransition(BOUNCE_DURATION, hexagon);
-        scaleDown.setToX(0.40);
-        scaleDown.setToY(0.40);
-
-        // Create scale back up animation
-        ScaleTransition scaleUp = new ScaleTransition(BOUNCE_DURATION, hexagon);
-        scaleUp.setToX(0.5);
-        scaleUp.setToY(0.5);
+        ScaleTransition scaleDown = createScaleTransition(hexagon, 0.40);
+        ScaleTransition scaleUp = createScaleTransition(hexagon, 0.5);
         scaleUp.setInterpolator(Interpolator.EASE_OUT);
 
-        // Create slight overshoot for more natural bounce
-        ScaleTransition scaleOvershoot = new ScaleTransition(BOUNCE_DURATION.divide(2), hexagon);
-        scaleOvershoot.setToX(0.55);
-        scaleOvershoot.setToY(0.55);
+        ScaleTransition scaleOvershoot = createScaleTransition(hexagon, 0.55);
+        scaleOvershoot.setDuration(BOUNCE_DURATION.divide(2));
 
-        // Final settle
-        ScaleTransition scaleSettle = new ScaleTransition(BOUNCE_DURATION.divide(2), hexagon);
-        scaleSettle.setToX(0.5);
-        scaleSettle.setToY(0.5);
+        ScaleTransition scaleSettle = createScaleTransition(hexagon, 0.5);
+        scaleSettle.setDuration(BOUNCE_DURATION.divide(2));
 
-        // Chain the animations
         SequentialTransition bounceEffect = new SequentialTransition(
                 scaleDown, scaleUp, scaleOvershoot, scaleSettle);
 
-        // Set up completion handler
-        bounceEffect.setOnFinished(e -> {
-            animationInProgress = false;
-        });
-
-        // Play the animation
+        bounceEffect.setOnFinished(e -> animationInProgress = false);
         bounceEffect.play();
     }
 
+    /**
+     * Helper method to create a scale transition.
+     *
+     * @param node The node to animate
+     * @param scale The target scale value
+     * @return The configured scale transition
+     */
+    private ScaleTransition createScaleTransition(javafx.scene.Node node, double scale) {
+        ScaleTransition transition = new ScaleTransition(BOUNCE_DURATION, node);
+        transition.setToX(scale);
+        transition.setToY(scale);
+        return transition;
+    }
+
+    /**
+     * Handles mouse click events on hexagon tiles.
+     *
+     * @param event The mouse event
+     */
     @FXML
     void getHexID(MouseEvent event) {
         HexCube c = getCube(event);
@@ -514,44 +574,44 @@ public class hexOustUIController {
             return;
         }
 
-        // Get the hexagon that was clicked
         Polygon hexagon = (Polygon) event.getSource();
-
-        // If the hexagon is already occupied, do nothing
         if (hexagon.getFill() == RED || hexagon.getFill() == BLUE) {
             return;
         }
 
-        // This gets the number of opposite color hexagons
         int oppColorSize = BoardLogic.listSize(isRedTurn);
-
-        // Add to the board logic immediately
         BoardLogic.addToList(c, isRedTurn);
 
-        // Set the permanent color immediately
-        Color permanentColor = isRedTurn ? RED : BLUE;
-        hexagon.setFill(permanentColor);
-        hexagon.setStroke(BLACK);
-        hexagon.setStrokeWidth(3);
-
-        // Remove hover behavior for occupied hexagons
-        hexagon.setOnMouseExited(null);
-
-        // Start the bounce animation without any callback
+        applyMoveToUI(hexagon);
         applyBounceEffect(hexagon);
 
-        // Check if a capture happened
         boolean captureHappened = oppColorSize != BoardLogic.listSize(isRedTurn);
-
-        // Check for victory immediately
         checkVictoryAndAnimate(isRedTurn);
 
-        // Only switch turns if no capture happened - do this immediately
         if (!captureHappened) {
             isRedTurn = !isRedTurn;
         }
 
-        // Update turn indicator immediately
+        updateTurnIndicator();
+    }
+
+    /**
+     * Applies visual changes to a hexagon after a move.
+     *
+     * @param hexagon The hexagon to update
+     */
+    private void applyMoveToUI(Polygon hexagon) {
+        Color permanentColor = isRedTurn ? RED : BLUE;
+        hexagon.setFill(permanentColor);
+        hexagon.setStroke(BLACK);
+        hexagon.setStrokeWidth(3);
+        hexagon.setOnMouseExited(null);
+    }
+
+    /**
+     * Updates the turn indicator to show current player.
+     */
+    private void updateTurnIndicator() {
         if (!isRedTurn) {
             turnIndicator.setText("Blue Player's Turn");
             turnIndicatorCircle.setFill(Color.BLUE);
@@ -561,38 +621,50 @@ public class hexOustUIController {
         }
     }
 
+    /**
+     * Applies hover effect to hexagons when mouse enters.
+     *
+     * @param event The mouse event
+     */
     @FXML
     void hover(MouseEvent event) {
         Polygon hexagon = (Polygon) event.getSource();
 
-        //skip hover effects for already occupied hexagons
         if (hexagon.getFill() == RED || hexagon.getFill() == BLUE) {
             return;
         }
 
         HexCube c = getCube(event);
         if (BoardLogic.isValidMove(c, isRedTurn)) {
-            final Color previousFill = (Color) hexagon.getFill();
-
-            hexagon.setStroke(WHITESMOKE);
-            hexagon.setStrokeWidth(5);
-
-            //set the appropriate hover color
-            if (isRedTurn) {
-                hexagon.setFill(redFade);
-            } else {
-                hexagon.setFill(blueFade);
-            }
-
-            //set the onMouseExited to restore the previous state
-            hexagon.setOnMouseExited(exitEvent -> {
-                hexagon.setStroke(BLACK);
-                hexagon.setFill(previousFill);
-                hexagon.setStrokeWidth(3);
-            });
+            applyHoverEffect(hexagon);
         }
     }
 
+    /**
+     * Applies the appropriate hover effect to a hexagon.
+     *
+     * @param hexagon The hexagon to apply effects to
+     */
+    private void applyHoverEffect(Polygon hexagon) {
+        final Color previousFill = (Color) hexagon.getFill();
+
+        hexagon.setStroke(WHITESMOKE);
+        hexagon.setStrokeWidth(5);
+
+        hexagon.setFill(isRedTurn ? redFade : blueFade);
+
+        hexagon.setOnMouseExited(exitEvent -> {
+            hexagon.setStroke(BLACK);
+            hexagon.setFill(previousFill);
+            hexagon.setStrokeWidth(3);
+        });
+    }
+
+    /**
+     * Handles exit button click event.
+     *
+     * @param event The mouse event
+     */
     @FXML
     void exit(MouseEvent event) {
         Button exitButton = (Button) event.getSource();
@@ -600,26 +672,71 @@ public class hexOustUIController {
         stage.close();
     }
 
+    /**
+     * Checks if the current move resulted in victory and triggers animation if needed.
+     *
+     * @param isRedTurn Whether it's red player's turn
+     */
     private void checkVictoryAndAnimate(boolean isRedTurn) {
         boolean gameWon = BoardLogic.checkGameWon(isRedTurn);
-
         if (gameWon) {
             playWaveVictoryAnimation(isRedTurn);
         }
     }
 
+    /**
+     * Plays the victory animation when a player wins.
+     *
+     * @param isRedWinner Whether red player is the winner
+     */
     private void playWaveVictoryAnimation(boolean isRedWinner) {
-        // Create wave effect container
+        Circle waveCircle = createVictoryWaveCircle(isRedWinner);
+        hexagonPane.getChildren().add(waveCircle);
+
+        Timeline waveExpansion = createWaveExpansionAnimation(waveCircle);
+
+        ParallelTransition parallelAnimations = new ParallelTransition();
+        parallelAnimations.getChildren().add(waveExpansion);
+
+        List<Polygon> allHexes = prepareHexagonsForVictoryAnimation();
+
+        SequentialTransition revealTiles = createRevealTilesAnimation(allHexes, isRedWinner);
+        parallelAnimations.getChildren().add(revealTiles);
+
+        Text victoryText = createVictoryText(isRedWinner);
+        hexagonPane.getChildren().add(victoryText);
+
+        ParallelTransition textAnimation = createVictoryTextAnimation(victoryText);
+        parallelAnimations.getChildren().add(textAnimation);
+
+        Button resetButton = createResetButton(waveCircle, victoryText);
+        Button quitButton = createQuitButton();
+
+        hexagonPane.getChildren().addAll(resetButton, quitButton);
+
+        ParallelTransition buttonAnimation = createButtonAnimations(resetButton, quitButton);
+
+        SequentialTransition fullAnimation = new SequentialTransition();
+        fullAnimation.getChildren().add(parallelAnimations);
+        fullAnimation.getChildren().add(buttonAnimation);
+
+        fullAnimation.play();
+    }
+
+    /**
+     * Creates a circle for the wave victory animation.
+     *
+     * @param isRedWinner Whether red player is the winner
+     * @return The configured circle
+     */
+    private Circle createVictoryWaveCircle(boolean isRedWinner) {
         Circle waveCircle = new Circle();
-        waveCircle.setCenterX(300); // Center of the board
+        waveCircle.setCenterX(300);
         waveCircle.setCenterY(300);
         waveCircle.setRadius(0);
 
-        // Define base color for winner
         Color baseColor = isRedWinner ? Color.RED : Color.BLUE;
-        Color finalColor = isRedWinner ? RED : BLUE;
 
-        // Create a radial gradient with faded edges
         RadialGradient gradient = new RadialGradient(
                 0, 0, 0.5, 0.5, 1.0, true, CycleMethod.NO_CYCLE,
                 new Stop(0.0, new Color(baseColor.getRed(), baseColor.getGreen(), baseColor.getBlue(), 0.0)),
@@ -627,64 +744,71 @@ public class hexOustUIController {
                 new Stop(1.0, new Color(baseColor.getRed(), baseColor.getGreen(), baseColor.getBlue(), 0.0))
         );
 
-        // Set gradient fill
         waveCircle.setFill(gradient);
+        return waveCircle;
+    }
 
-        // Add wave to board
-        hexagonPane.getChildren().add(waveCircle);
-
-        // Create expanding wave animation
-        Timeline waveExpansion = new Timeline(
+    /**
+     * Creates the wave expansion animation.
+     *
+     * @param waveCircle The circle to animate
+     * @return The configured animation
+     */
+    private Timeline createWaveExpansionAnimation(Circle waveCircle) {
+        return new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(waveCircle.radiusProperty(), 0)),
                 new KeyFrame(Duration.millis(1300), new KeyValue(waveCircle.radiusProperty(), 500, Interpolator.EASE_OUT))
         );
+    }
 
-        // Prepare hexagon animations
-        ParallelTransition parallelAnimations = new ParallelTransition();
-
-        // Add wave animation to parallel animations
-        parallelAnimations.getChildren().add(waveExpansion);
-
+    /**
+     * Prepares all hexagons for the victory animation.
+     *
+     * @return List of sorted hexagons by distance from center
+     */
+    private List<Polygon> prepareHexagonsForVictoryAnimation() {
         List<Polygon> allHexes = new ArrayList<>();
         for (var node : hexagonPane.getChildren()) {
             if (node instanceof Polygon hex) {
-                // Clear any hover effects
                 hex.setStroke(BLACK);
                 hex.setStrokeWidth(3);
 
-                // If it's showing a hover color, reset it to the appropriate color
                 if (hex.getFill() == redFade || hex.getFill() == blueFade) {
                     hex.setFill(baseColor);
                 }
 
-                // Disable all mouse events
                 hex.setOnMouseEntered(null);
                 hex.setOnMouseExited(null);
                 hex.setOnMouseClicked(null);
 
-                // Add to our list for animation
                 allHexes.add(hex);
             }
         }
 
-        // Sort hexagons by distance from center
         allHexes.sort((a, b) -> {
             double distA = Math.sqrt(Math.pow(a.getLayoutX() - 300, 2) + Math.pow(a.getLayoutY() - 300, 2));
             double distB = Math.sqrt(Math.pow(b.getLayoutX() - 300, 2) + Math.pow(b.getLayoutY() - 300, 2));
             return Double.compare(distA, distB);
         });
 
-        // Create a sequence of reveal animations that will run in parallel with the wave
+        return allHexes;
+    }
+
+    /**
+     * Creates the animation that reveals tiles in sequence.
+     *
+     * @param allHexes List of hexagons to animate
+     * @param isRedWinner Whether red player is the winner
+     * @return The configured animation
+     */
+    private SequentialTransition createRevealTilesAnimation(List<Polygon> allHexes, boolean isRedWinner) {
         SequentialTransition revealTiles = new SequentialTransition();
+        Color finalColor = isRedWinner ? RED : BLUE;
 
-        // Create a slightly faster sequence to match the wave expansion timing
-        for (int i = 0; i < allHexes.size(); i++) {
-            Polygon hex = allHexes.get(i);
-
-            // Only animate non-winner colored hexagons
+        for (Polygon hex : allHexes) {
             if ((isRedWinner && hex.getFill() != RED) || (!isRedWinner && hex.getFill() != BLUE)) {
                 FillTransition fillTransition = new FillTransition(
-                        Duration.millis(10),  // Keep this fast for rapid sequential effect
+                        Duration.millis(10),
                         hex,
                         (Color) hex.getFill(),
                         finalColor
@@ -694,10 +818,16 @@ public class hexOustUIController {
             }
         }
 
-        // Add the reveal tiles animation to the parallel group
-        parallelAnimations.getChildren().add(revealTiles);
+        return revealTiles;
+    }
 
-        // Create victory text
+    /**
+     * Creates the victory text element.
+     *
+     * @param isRedWinner Whether red player is the winner
+     * @return The configured text element
+     */
+    private Text createVictoryText(boolean isRedWinner) {
         Text victoryText = new Text();
         victoryText.setText(isRedWinner ? "RED WINS!" : "BLUE WINS!");
         victoryText.setFont(new Font("Arial Bold", 80));
@@ -705,15 +835,20 @@ public class hexOustUIController {
         victoryText.setStroke(isRedWinner ? Color.RED.darker() : Color.BLUE.darker());
         victoryText.setStrokeWidth(2);
 
-        // Center the text
         victoryText.setLayoutX(300 - victoryText.getBoundsInLocal().getWidth() / 2);
         victoryText.setLayoutY(330);
         victoryText.setOpacity(0);
 
-        // Add text to the pane
-        hexagonPane.getChildren().add(victoryText);
+        return victoryText;
+    }
 
-        // Create text animation
+    /**
+     * Creates the animation for the victory text.
+     *
+     * @param victoryText The text to animate
+     * @return The configured animation
+     */
+    private ParallelTransition createVictoryTextAnimation(Text victoryText) {
         FadeTransition textFade = new FadeTransition(Duration.millis(800), victoryText);
         textFade.setFromValue(0);
         textFade.setToValue(1);
@@ -725,11 +860,41 @@ public class hexOustUIController {
         textScale.setToY(1.0);
         textScale.setInterpolator(Interpolator.EASE_OUT);
 
-        ParallelTransition textAnimation = new ParallelTransition(textFade, textScale);
+        return new ParallelTransition(textFade, textScale);
+    }
 
+    /**
+     * Creates the reset button for the victory screen.
+     *
+     * @param waveCircle The wave circle to remove when resetting
+     * @param victoryText The victory text to remove when resetting
+     * @return The configured button
+     */
+    private Button createResetButton(Circle waveCircle, Text victoryText) {
+        Button resetButton = new Button("Play Again");
+        resetButton.setLayoutX(262.5);
+        resetButton.setLayoutY(350);
+        resetButton.setOpacity(0);
+        resetButton.setOnAction(event -> {
+            resetGame();
+            hexagonPane.getChildren().removeAll(
+                    resetButton,
+                    hexagonPane.lookup("#quitButton"),
+                    victoryText,
+                    waveCircle
+            );
+        });
+        return resetButton;
+    }
 
-        // Create buttons
+    /**
+     * Creates the quit button for the victory screen.
+     *
+     * @return The configured button
+     */
+    private Button createQuitButton() {
         Button quitButton = new Button("Quit");
+        quitButton.setId("quitButton");
         quitButton.setLayoutX(280);
         quitButton.setLayoutY(380);
         quitButton.setOpacity(0);
@@ -737,20 +902,17 @@ public class hexOustUIController {
             Stage stage = (Stage) quitButton.getScene().getWindow();
             stage.close();
         });
+        return quitButton;
+    }
 
-        Button resetButton = new Button("Play Again");
-        resetButton.setLayoutX(262.5);
-        resetButton.setLayoutY(350);
-        resetButton.setOpacity(0);
-        resetButton.setOnAction(event -> {
-            resetGame();
-            hexagonPane.getChildren().removeAll(resetButton, quitButton, victoryText, waveCircle);
-        });
-
-        // Add buttons to pane but make them invisible initially
-        hexagonPane.getChildren().addAll(resetButton, quitButton);
-
-        // Create button animations
+    /**
+     * Creates animations for the victory screen buttons.
+     *
+     * @param resetButton The reset button to animate
+     * @param quitButton The quit button to animate
+     * @return The configured animations
+     */
+    private ParallelTransition createButtonAnimations(Button resetButton, Button quitButton) {
         FadeTransition resetFade = new FadeTransition(Duration.millis(600), resetButton);
         resetFade.setFromValue(0);
         resetFade.setToValue(1);
@@ -759,63 +921,44 @@ public class hexOustUIController {
         quitFade.setFromValue(0);
         quitFade.setToValue(1);
 
-        ParallelTransition buttonAnimation = new ParallelTransition(resetFade, quitFade);
-
-        // Create the full animation sequence
-        SequentialTransition fullAnimation = new SequentialTransition();
-
-        // First, run the wave, hexagon and text animations in parallel
-        parallelAnimations.getChildren().add(textAnimation);
-
-        fullAnimation.getChildren().add(parallelAnimations);
-
-        // Finally, after the text appears, show the buttons
-        fullAnimation.getChildren().addAll(buttonAnimation);
-
-        // Play the entire animation sequence
-        fullAnimation.play();
+        return new ParallelTransition(resetFade, quitFade);
     }
 
     /**
-     * Reset the game
+     * Resets the game to initial state.
      */
     private void resetGame() {
-        // Reset the board logic
         BoardLogic.clearBoard();
 
-        // Reset all hexagons to base color
         for (var node : hexagonPane.getChildren()) {
             if (node instanceof Polygon poly) {
-                // Reset visual properties
-                poly.setFill(baseColor);
-                poly.setEffect(null);
-                poly.setScaleX(.5);
-                poly.setScaleY(.5);
-                poly.setStroke(BLACK);
-                poly.setStrokeWidth(3);
-
-                // Re-enable all mouse event handlers by re-assigning them
-                poly.setOnMouseEntered(this::hover);
-                poly.setOnMouseExited(event -> {
-                    poly.setStroke(BLACK);
-                    poly.setFill(baseColor);
-                    poly.setStrokeWidth(3);
-                });
-                poly.setOnMouseClicked(this::getHexID);
+                resetHexagon(poly);
             }
         }
 
-        // Reset turn indicator
         isRedTurn = true;
-        turnIndicator.setText("Red Player's Turn");
-        turnIndicatorCircle.setFill(Color.RED);
+        updateTurnIndicator();
     }
 
+    /**
+     * Resets a single hexagon to its initial state.
+     *
+     * @param hex The hexagon to reset
+     */
+    private void resetHexagon(Polygon hex) {
+        hex.setFill(baseColor);
+        hex.setEffect(null);
+        hex.setScaleX(.5);
+        hex.setScaleY(.5);
+        hex.setStroke(BLACK);
+        hex.setStrokeWidth(3);
 
-
-    @FXML
-    private Label turnIndicator;
-    private boolean isRedTurn = true; // Start with Red Player
-    @FXML
-    private Circle turnIndicatorCircle;
+        hex.setOnMouseEntered(this::hover);
+        hex.setOnMouseExited(event -> {
+            hex.setStroke(BLACK);
+            hex.setFill(baseColor);
+            hex.setStrokeWidth(3);
+        });
+        hex.setOnMouseClicked(this::getHexID);
+    }
 }
