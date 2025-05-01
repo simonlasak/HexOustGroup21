@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="hexagonPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UIPackage.hexOustUIController">
    <children>
-      <Button focusTraversable="false" layoutX="35.0" layoutY="36.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#exit" prefHeight="30.0" prefWidth="67.0" text="EXIT">
-         <font>
-            <Font size="15.0" />
-         </font>
-         <effect>
-            <Blend mode="DARKEN" />
-         </effect>
-      </Button>
       <Polygon fx:id="hex05" fill="#dcdcdc" layoutX="263.0" layoutY="322.0" onMouseClicked="#getHexID" onMouseEntered="#hover" rotate="90.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0">
          <points>
             <Double fx:value="0.0" />
@@ -2034,8 +2026,110 @@
             <Double fx:value="-25.0" />
          </points>
       </Polygon>
+      <Polygon fx:id="reset0" fill="#dcdcdc" layoutX="115.0" layoutY="542.0" onMouseClicked="#reset" onMouseEntered="#ButtonHover" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0">
+         <points>
+            <Double fx:value="12.5" />
+            <Double fx:value="-22.5" />
+            <Double fx:value="25" />
+            <Double fx:value="0" />
+            <Double fx:value="50" />
+            <Double fx:value="0" />
+            <Double fx:value="62.5" />
+            <Double fx:value="22.5" />
+            <Double fx:value="50" />
+            <Double fx:value="45" />
+            <Double fx:value="-50" />
+            <Double fx:value="45" />
+            <Double fx:value="-62.5" />
+            <Double fx:value="22.5" />
+            <Double fx:value="-50" />
+            <Double fx:value="0" />
+            <Double fx:value="-62.5" />
+            <Double fx:value="-22.5" />
+            <Double fx:value="-50" />
+            <Double fx:value="-45" />
+            <Double fx:value="-25" />
+            <Double fx:value="-45" />
+            <Double fx:value="-12.5" />
+            <Double fx:value="-22.5" />
+         </points>
+      </Polygon>
+      <Polygon fx:id="turn0" fill="#dcdcdc" layoutX="486.0" layoutY="59.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0">
+         <points>
+            <Double fx:value="12.5" />
+            <Double fx:value="-22.5" />
+            <Double fx:value="25" />
+            <Double fx:value="0" />
+            <Double fx:value="50" />
+            <Double fx:value="0" />
+            <Double fx:value="62.5" />
+            <Double fx:value="22.5" />
+            <Double fx:value="50" />
+            <Double fx:value="45" />
+            <Double fx:value="-50" />
+            <Double fx:value="45" />
+            <Double fx:value="-62.5" />
+            <Double fx:value="22.5" />
+            <Double fx:value="-50" />
+            <Double fx:value="0" />
+            <Double fx:value="-62.5" />
+            <Double fx:value="-22.5" />
+            <Double fx:value="-50" />
+            <Double fx:value="-45" />
+            <Double fx:value="-25" />
+            <Double fx:value="-45" />
+            <Double fx:value="-12.5" />
+            <Double fx:value="-22.5" />
+         </points>
+      </Polygon>
+      <Polygon fx:id="exit0" fill="#dcdcdc" layoutX="115.0" layoutY="58.0" onMouseClicked="#exit" onMouseEntered="#ButtonHover" rotate="180.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0">
+         <points>
+            <Double fx:value="12.5" />
+            <Double fx:value="-22.5" />
+            <Double fx:value="25" />
+            <Double fx:value="0" />
+            <Double fx:value="50" />
+            <Double fx:value="0" />
+            <Double fx:value="62.5" />
+            <Double fx:value="22.5" />
+            <Double fx:value="50" />
+            <Double fx:value="45" />
+            <Double fx:value="-50" />
+            <Double fx:value="45" />
+            <Double fx:value="-62.5" />
+            <Double fx:value="22.5" />
+            <Double fx:value="-50" />
+            <Double fx:value="0" />
+            <Double fx:value="-62.5" />
+            <Double fx:value="-22.5" />
+            <Double fx:value="-50" />
+            <Double fx:value="-45" />
+            <Double fx:value="-25" />
+            <Double fx:value="-45" />
+            <Double fx:value="-12.5" />
+            <Double fx:value="-22.5" />
+         </points>
+         <rotationAxis>
+            <Point3D x="1.0" />
+         </rotationAxis>
+      </Polygon>
 
-      <Label fx:id="turnIndicator" layoutX="445.0" layoutY="38" style="-fx-font-size: 18px;" text="Red Player's Turn" />
-      <Circle fx:id="turnIndicatorCircle" fill="RED" layoutX="433.0" layoutY="52.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="turnIndicator" alignment="CENTER" contentDisplay="CENTER" layoutX="425.0" layoutY="18.0" prefHeight="59.0" prefWidth="126.0" style="-fx-font-size: 18px;" text="Red Player's&#10;     Turn" textAlignment="CENTER">
+         <effect>
+            <Glow level="0.5" />
+         </effect></Label>
+      <Label fx:id="exitText" alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="13.0" mouseTransparent="true" prefHeight="45.0" prefWidth="126.0" style="-fx-font-size: 18px;" text="Quit Game" textAlignment="CENTER">
+         <effect>
+            <Glow level="0.5" />
+         </effect>
+      </Label>
+      <Label fx:id="resetText" alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="542.0" mouseTransparent="true" prefHeight="45.0" prefWidth="126.0" style="-fx-font-size: 18px;" text="Reset Game" textAlignment="CENTER">
+         <effect>
+            <Glow level="0.5" />
+         </effect>
+      </Label>
    </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </AnchorPane>

@@ -27,6 +27,7 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static javafx.scene.paint.Color.*;
 
@@ -37,388 +38,42 @@ import static javafx.scene.paint.Color.*;
 public class hexOustUIController {
 
     @FXML
-    public Polygon hex154;
-
-    @FXML
-    private Polygon hex0;
-
-    @FXML
-    private Polygon hex05;
-
-    @FXML
-    private Polygon hex1;
-
-    @FXML
-    private Polygon hex16;
-
-    @FXML
-    private Polygon hex19111;
-
-    @FXML
-    private Polygon hex191111;
-
-    @FXML
-    private Polygon hex1911111;
-
-    @FXML
-    private Polygon hex19111111;
-
-    @FXML
-    private Polygon hex191111111;
-
-    @FXML
-    private Polygon hex1911111111;
-
-    @FXML
-    private Polygon hex19111111111;
-
-    @FXML
-    private Polygon hex191111111111;
-
-    @FXML
-    private Polygon hex1911111112;
-
-    @FXML
-    private Polygon hex19111111121;
-
-    @FXML
-    private Polygon hex191111112;
-
-    @FXML
-    private Polygon hex191111113;
-
-    @FXML
-    private Polygon hex19111112;
-
-    @FXML
-    private Polygon hex191112;
-
-    @FXML
-    private Polygon hex1911121;
-
-    @FXML
-    private Polygon hex19111211;
-
-    @FXML
-    private Polygon hex191112111;
-
-    @FXML
-    private Polygon hex1911122;
-
-    @FXML
-    private Polygon hex19111221;
-
-    @FXML
-    private Polygon hex191113;
-
-    @FXML
-    private Polygon hex191114;
-
-    @FXML
-    private Polygon hex19112;
-
-    @FXML
-    private Polygon hex1912111;
-
-    @FXML
-    private Polygon hex19121111;
-
-    @FXML
-    private Polygon hex191211111;
-
-    @FXML
-    private Polygon hex1912111111;
-
-    @FXML
-    private Polygon hex19121111111;
-
-    @FXML
-    private Polygon hex191211111111;
-
-    @FXML
-    private Polygon hex1912111111111;
-
-    @FXML
-    private Polygon hex19121111111111;
-
-    @FXML
-    private Polygon hex191211111111111;
-
-    @FXML
-    private Polygon hex1912111111112;
-
-    @FXML
-    private Polygon hex19121111111121;
-
-    @FXML
-    private Polygon hex191211111112;
-
-    @FXML
-    private Polygon hex191211111113;
-
-    @FXML
-    private Polygon hex19121111112;
-
-    @FXML
-    private Polygon hex19121112;
-
-    @FXML
-    private Polygon hex191211121;
-
-    @FXML
-    private Polygon hex1912111211;
-
-    @FXML
-    private Polygon hex19121112111;
-
-    @FXML
-    private Polygon hex191211121111;
-
-    @FXML
-    private Polygon hex1912111211111;
-
-    @FXML
-    private Polygon hex19121112111111;
-
-    @FXML
-    private Polygon hex191211121112;
-
-    @FXML
-    private Polygon hex1912111211121;
-
-    @FXML
-    private Polygon hex19121112112;
-
-    @FXML
-    private Polygon hex19121112113;
-
-    @FXML
-    private Polygon hex1912111212;
-
-    @FXML
-    private Polygon hex1912112;
-
-    @FXML
-    private Polygon hex19121121;
-
-    @FXML
-    private Polygon hex191211211;
-
-    @FXML
-    private Polygon hex1912112111;
-
-    @FXML
-    private Polygon hex19121121112;
-
-    @FXML
-    private Polygon hex191211211121;
-
-    @FXML
-    private Polygon hex1912112111211;
-
-    @FXML
-    private Polygon hex19121121112111;
-
-    @FXML
-    private Polygon hex191211211121111;
-
-    @FXML
-    private Polygon hex1912112111211111;
-
-    @FXML
-    private Polygon hex19121121112112;
-
-    @FXML
-    private Polygon hex191211211121121;
-
-    @FXML
-    private Polygon hex1912112111212;
-
-    @FXML
-    private Polygon hex1912112111213;
-
-    @FXML
-    private Polygon hex191211211122;
-
-    @FXML
-    private Polygon hex19121122;
-
-    @FXML
-    private Polygon hex191211221;
-
-    @FXML
-    private Polygon hex1912112212;
-
-    @FXML
-    private Polygon hex19121122121;
-
-    @FXML
-    private Polygon hex191211221211;
-
-    @FXML
-    private Polygon hex1912112212111;
-
-    @FXML
-    private Polygon hex19121122121111;
-
-    @FXML
-    private Polygon hex1912112212112;
-
-    @FXML
-    private Polygon hex19121122121121;
-
-    @FXML
-    private Polygon hex191211221212;
-
-    @FXML
-    private Polygon hex191211221213;
-
-    @FXML
-    private Polygon hex19121122122;
-
-    @FXML
-    private Polygon hex19121123;
-
-    @FXML
-    private Polygon hex191211231;
-
-    @FXML
-    private Polygon hex1912113;
-
-    @FXML
-    private Polygon hex19121131;
-
-    @FXML
-    private Polygon hex191211311;
-
-    @FXML
-    private Polygon hex1912113111;
-
-    @FXML
-    private Polygon hex19121131111;
-
-    @FXML
-    private Polygon hex191211311111;
-
-    @FXML
-    private Polygon hex1912113111111;
-
-    @FXML
-    private Polygon hex19121131112;
-
-    @FXML
-    private Polygon hex191211311121;
-
-    @FXML
-    private Polygon hex1912113112;
-
-    @FXML
-    private Polygon hex1912113113;
-
-    @FXML
-    private Polygon hex191211312;
-
-    @FXML
-    private Polygon hex191212;
-
-    @FXML
-    private Polygon hex1912121;
-
-    @FXML
-    private Polygon hex19121212;
-
-    @FXML
-    private Polygon hex191212121;
-
-    @FXML
-    private Polygon hex1912121211;
-
-    @FXML
-    private Polygon hex19121212111;
-
-    @FXML
-    private Polygon hex191212121111;
-
-    @FXML
-    private Polygon hex1912121211111;
-
-    @FXML
-    private Polygon hex19121212111111;
-
-    @FXML
-    private Polygon hex191212121112;
-
-    @FXML
-    private Polygon hex19121212112;
-
-    @FXML
-    private Polygon hex191213;
-
-    @FXML
-    private Polygon hex1912131;
-
-    @FXML
-    private Polygon hex19121311;
-
-    @FXML
-    private Polygon hex1912131112;
-
-    @FXML
-    private Polygon hex19121311121;
-
-    @FXML
-    private Polygon hex191213111211;
-
-    @FXML
-    private Polygon hex19121311121111;
-
-    @FXML
-    private Polygon hex191213113;
-
-    @FXML
-    private Polygon hex1912131131;
-
-    @FXML
-    private Polygon hex19121311311;
-
-    @FXML
-    private Polygon hex191213113111;
-
-    @FXML
-    private Polygon hex191213113112;
-
-    @FXML
-    private Polygon hex1912131131121;
-
-    @FXML
-    private Polygon hex19121311312;
-
-    @FXML
-    private Polygon hex19121311313;
-
-    @FXML
-    private Polygon hex1912132;
-
-    @FXML
-    private Polygon hex19121321;
-
-    @FXML
-    private Polygon hex191213211;
-
-    @FXML
-    private Polygon hex1912132111;
-
-    @FXML
-    private Polygon hex191214;
-
-    @FXML
-    private Polygon hex2;
-
-    @FXML
-    private Polygon hex3;
-
-    @FXML
-    private Polygon hex4;
+    private Polygon exit0;
+    @FXML
+    private Polygon turn0;
+    @FXML
+    private Polygon reset0;
+
+    // Hexagon board elements
+    @FXML
+    public Polygon hex154, hex0, hex05, hex1, hex19111, hex191111, hex1911111, hex19111111,
+            hex191111111, hex1911111111, hex19111111111, hex191111111111, hex19111111121,
+            hex191111112, hex191111113, hex19111112, hex191112, hex1911121, hex19111211, hex191112111,
+            hex1911122, hex19111221, hex191113, hex191114, hex19112, hex1912111, hex19121111,
+            hex191211111, hex1912111111, hex19121111111, hex191211111111, hex1912111111111,
+            hex19121111111111, hex191211111111111, hex1912111111112, hex19121111111121, hex191211111112,
+            hex191211111113, hex19121111112, hex19121112, hex191211121, hex1912111211, hex19121112111,
+            hex191211121111, hex1912111211111, hex19121112111111, hex191211121112, hex1912111211121,
+            hex19121112112, hex19121112113, hex1912111212, hex1912112, hex19121121, hex191211211,
+            hex1912112111, hex19121121112, hex191211211121, hex1912112111211, hex19121121112111,
+            hex191211211121111, hex1912112111211111, hex19121121112112, hex191211211121121,
+            hex1912112111212, hex1912112111213, hex191211211122, hex19121122, hex191211221, hex1912112212,
+            hex19121122121, hex191211221211, hex1912112212111, hex19121122121111, hex1912112212112,
+            hex19121122121121, hex191211221212, hex191211221213, hex19121122122, hex19121123, hex191211231,
+            hex1912113, hex19121131, hex191211311, hex1912113111, hex19121131111, hex191211311111,
+            hex1912113111111, hex19121131112, hex191211311121, hex1912113112, hex1912113113, hex191211312,
+            hex191212, hex1912121, hex19121212, hex191212121, hex1912121211, hex19121212111, hex191212121111,
+            hex1912121211111, hex19121212111111, hex191212121112, hex19121212112, hex191213, hex1912131,
+            hex19121311, hex1912131112, hex19121311121, hex191213111211, hex19121311121111, hex191213113,
+            hex1912131131, hex19121311311, hex191213113111, hex191213113112, hex1912131131121, hex19121311312,
+            hex19121311313, hex1912132, hex19121321, hex191213211, hex1912132111, hex191214, hex2, hex3, hex4;
+
+    // UI control labels
+    @FXML
+    private Label turnIndicator, exitText, resetText;
+
+    @FXML
+    private AnchorPane hexagonPane;
 
     /**
      * Base color for unoccupied hexagon tiles.
@@ -446,21 +101,9 @@ public class hexOustUIController {
     private boolean animationInProgress = false;
 
     /**
-     * Reference to the main pane containing all hexagon tiles.
-     */
-    @FXML
-    private AnchorPane hexagonPane;
-
-    /**
      * Static reference to the controller instance.
      */
     private static hexOustUIController instance;
-
-    /**
-     * Label displaying the current player's turn.
-     */
-    @FXML
-    private Label turnIndicator;
 
     /**
      * Flag tracking which player's turn it is (true = Red, false = Blue).
@@ -468,17 +111,12 @@ public class hexOustUIController {
     private boolean isRedTurn = true;
 
     /**
-     * Circle that indicates current player's turn.
-     */
-    @FXML
-    private Circle turnIndicatorCircle;
-
-    /**
-     * Initialize the controller when the FXML is loaded.
+     * Initializes the UI components and sets up event handlers and initial state.
      */
     @FXML
     public void initialize() {
         instance = this;
+        updateTurnIndicator();
     }
 
     /**
@@ -522,6 +160,32 @@ public class hexOustUIController {
     private void invalidAlert() {
         Stage parentStage = (Stage) hexagonPane.getScene().getWindow();
         CustomErrorDialog.show("You cannot place a hex here!", parentStage, isRedTurn);
+    }
+
+    public void ButtonHover(MouseEvent mouseEvent) {
+        Polygon button = (Polygon) mouseEvent.getSource();
+        final Color previousFill = (Color) button.getFill();
+
+        button.setStroke(BLACK);
+        button.setStrokeWidth(4);
+
+        if(Objects.equals(button.getId(), "exit0")){
+            exitText.setTextFill(WHITESMOKE);
+        }
+        else{
+            resetText.setTextFill(WHITESMOKE);
+        }
+
+        button.setFill(isRedTurn ? RED : BLUE);
+
+        button.setOnMouseExited(exitEvent -> {
+            button.setStroke(BLACK);
+            button.setFill(previousFill);
+            button.setStrokeWidth(2);
+            exitText.setTextFill(BLACK);
+            resetText.setTextFill(BLACK);
+        });
+
     }
 
     /**
@@ -804,15 +468,19 @@ public class hexOustUIController {
     }
 
     /**
-     * Updates the turn indicator to show current player.
+     * Updates the turn indicator hexagons to reflect the current player's turn.
+     * This method extends the existing updateTurnIndicator method.
      */
     private void updateTurnIndicator() {
+        // Update the text and circle indicator
         if (!isRedTurn) {
-            turnIndicator.setText("Blue Player's Turn");
-            turnIndicatorCircle.setFill(Color.BLUE);
+            turnIndicator.setText("Blue Player's\n" + "     Turn");
+            turnIndicator.setTextFill(WHITESMOKE);
+            turn0.setFill(BLUE);
         } else {
-            turnIndicator.setText("Red Player's Turn");
-            turnIndicatorCircle.setFill(Color.RED);
+            turnIndicator.setText("Red Player's\n" + "     Turn");
+            turnIndicator.setTextFill(BLACK);
+            turn0.setFill(RED);
         }
     }
 
@@ -862,9 +530,323 @@ public class hexOustUIController {
      */
     @FXML
     void exit(MouseEvent event) {
-        Button exitButton = (Button) event.getSource();
+        Polygon exitButton = (Polygon) event.getSource();
         Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
+
+        // Create a confirmation dialog before exiting
+        confirmExit(stage);
+    }
+
+    /**
+     * Shows an exit confirmation dialog.
+     *
+     * @param parentStage The parent stage for the dialog
+     */
+    private void confirmExit(Stage parentStage) {
+        // Define theme colors based on current player
+        Color playerColor = isRedTurn ? Color.RED : Color.BLUE;
+        Color playerColorDark = isRedTurn ? Color.color(0.7, 0, 0) : Color.color(0, 0, 0.7);
+
+        // Convert colors to hex format for CSS
+        String hexColor = String.format("#%02X%02X%02X",
+                (int)(playerColor.getRed() * 255),
+                (int)(playerColor.getGreen() * 255),
+                (int)(playerColor.getBlue() * 255));
+
+        String darkHexColor = String.format("#%02X%02X%02X",
+                (int)(playerColorDark.getRed() * 255),
+                (int)(playerColorDark.getGreen() * 255),
+                (int)(playerColorDark.getBlue() * 255));
+
+        // Define button styles
+        String buttonStyleNormal = "-fx-background-color: " + hexColor + ";" +
+                "-fx-text-fill: white;" +
+                "-fx-font-weight: bold;" +
+                "-fx-font-size: 14px;" +
+                "-fx-background-radius: 15;" +
+                "-fx-border-color: white;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-radius: 15;" +
+                "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1);";
+
+        String buttonStyleHover = "-fx-background-color: " + darkHexColor + ";" +
+                "-fx-text-fill: white;" +
+                "-fx-font-weight: bold;" +
+                "-fx-font-size: 14px;" +
+                "-fx-background-radius: 15;" +
+                "-fx-border-color: white;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-radius: 15;" +
+                "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 8, 0.0, 0, 2);";
+
+        // Create a new stage for the dialog
+        Stage dialogStage = new Stage();
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogStage.initStyle(StageStyle.TRANSPARENT);
+        dialogStage.initOwner(parentStage);
+
+        // Create a hexagon shape as background
+        Polygon hexBackground = createDialogHexBackground(playerColor);
+
+        // Create the message label
+        Label messageLabel = new Label("Are you sure you want to\nexit the game?");
+        messageLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        messageLabel.setTextFill(BLACK);
+        messageLabel.setWrapText(true);
+        messageLabel.setMaxWidth(250);
+        messageLabel.setAlignment(Pos.CENTER);
+        messageLabel.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+
+        // Create the Yes button
+        Button yesButton = new Button("Yes");
+        yesButton.setStyle(buttonStyleNormal);
+        yesButton.setPrefWidth(80);
+        yesButton.setPrefHeight(30);
+
+        // Add hover effects
+        yesButton.setOnMouseEntered(e -> yesButton.setStyle(buttonStyleHover));
+        yesButton.setOnMouseExited(e -> yesButton.setStyle(buttonStyleNormal));
+
+        // Create the No button
+        Button noButton = new Button("No");
+        noButton.setStyle(buttonStyleNormal);
+        noButton.setPrefWidth(80);
+        noButton.setPrefHeight(30);
+
+        // Add hover effects
+        noButton.setOnMouseEntered(e -> noButton.setStyle(buttonStyleHover));
+        noButton.setOnMouseExited(e -> noButton.setStyle(buttonStyleNormal));
+
+        // Set actions
+        yesButton.setOnAction(e -> {
+            dialogStage.close();
+            parentStage.close(); // Close the main application window
+        });
+
+        noButton.setOnAction(e -> dialogStage.close());
+
+        // Create button layout
+        javafx.scene.layout.HBox buttonBox = new javafx.scene.layout.HBox(15);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().addAll(yesButton, noButton);
+
+        // Create the content layout
+        VBox content = new VBox(20);
+        content.setAlignment(Pos.CENTER);
+        content.setStyle("-fx-background-color: transparent;");
+        content.setPadding(new javafx.geometry.Insets(15, 15, 15, 15));
+        content.getChildren().addAll(messageLabel, buttonBox);
+
+        // Create main layout
+        javafx.scene.layout.StackPane layout = new javafx.scene.layout.StackPane();
+        layout.getChildren().addAll(hexBackground, content);
+        layout.setStyle("-fx-background-color: transparent;");
+
+        // Create and configure the scene
+        Scene scene = new Scene(layout, 300, 300);
+        scene.setFill(Color.TRANSPARENT);
+
+        // Configure and show the dialog
+        dialogStage.setScene(scene);
+
+        // Center on parent stage
+        dialogStage.setOnShown(e -> {
+            dialogStage.setX(parentStage.getX() + parentStage.getWidth()/2 - dialogStage.getWidth()/2);
+            dialogStage.setY(parentStage.getY() + parentStage.getHeight()/2 - dialogStage.getHeight()/2);
+
+            // Play entry animation
+            playDialogEntryAnimation(layout);
+        });
+
+        dialogStage.showAndWait();
+    }
+
+    /**
+     * Handles reset button click event.
+     *
+     * @param event The mouse event
+     */
+    @FXML
+    void reset(MouseEvent event) {
+        // Create a confirmation dialog before resetting
+        Stage parentStage = (Stage) hexagonPane.getScene().getWindow();
+
+        // Create a confirmation dialog with styling based on current player
+        confirmReset(parentStage);
+    }
+
+    /**
+     * Shows a reset confirmation dialog.
+     *
+     * @param parentStage The parent stage for the dialog
+     */
+    private void confirmReset(Stage parentStage) {
+        // Define theme colors based on current player
+        Color playerColor = isRedTurn ? Color.RED : Color.BLUE;
+        Color playerColorDark = isRedTurn ? Color.color(0.7, 0, 0) : Color.color(0, 0, 0.7);
+
+        // Convert colors to hex format for CSS
+        String hexColor = String.format("#%02X%02X%02X",
+                (int)(playerColor.getRed() * 255),
+                (int)(playerColor.getGreen() * 255),
+                (int)(playerColor.getBlue() * 255));
+
+        String darkHexColor = String.format("#%02X%02X%02X",
+                (int)(playerColorDark.getRed() * 255),
+                (int)(playerColorDark.getGreen() * 255),
+                (int)(playerColorDark.getBlue() * 255));
+
+        // Define button styles
+        String buttonStyleNormal = "-fx-background-color: " + hexColor + ";" +
+                "-fx-text-fill: white;" +
+                "-fx-font-weight: bold;" +
+                "-fx-font-size: 14px;" +
+                "-fx-background-radius: 15;" +
+                "-fx-border-color: white;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-radius: 15;" +
+                "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1);";
+
+        String buttonStyleHover = "-fx-background-color: " + darkHexColor + ";" +
+                "-fx-text-fill: white;" +
+                "-fx-font-weight: bold;" +
+                "-fx-font-size: 14px;" +
+                "-fx-background-radius: 15;" +
+                "-fx-border-color: white;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-radius: 15;" +
+                "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 8, 0.0, 0, 2);";
+
+        // Create a new stage for the dialog
+        Stage dialogStage = new Stage();
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogStage.initStyle(StageStyle.TRANSPARENT);
+        dialogStage.initOwner(parentStage);
+
+        // Create a hexagon shape as background
+        Polygon hexBackground = createDialogHexBackground(playerColor);
+
+        // Create the message label
+        Label messageLabel = new Label("Are you sure you want to\nreset the game?");
+        messageLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        messageLabel.setTextFill(BLACK);
+        messageLabel.setWrapText(true);
+        messageLabel.setMaxWidth(250);
+        messageLabel.setAlignment(Pos.CENTER);
+        messageLabel.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+
+        // Create the Yes button
+        Button yesButton = new Button("Yes");
+        yesButton.setStyle(buttonStyleNormal);
+        yesButton.setPrefWidth(80);
+        yesButton.setPrefHeight(30);
+
+        // Add hover effects
+        yesButton.setOnMouseEntered(e -> yesButton.setStyle(buttonStyleHover));
+        yesButton.setOnMouseExited(e -> yesButton.setStyle(buttonStyleNormal));
+
+        // Create the No button
+        Button noButton = new Button("No");
+        noButton.setStyle(buttonStyleNormal);
+        noButton.setPrefWidth(80);
+        noButton.setPrefHeight(30);
+
+        // Add hover effects
+        noButton.setOnMouseEntered(e -> noButton.setStyle(buttonStyleHover));
+        noButton.setOnMouseExited(e -> noButton.setStyle(buttonStyleNormal));
+
+        // Set actions
+        yesButton.setOnAction(e -> {
+            resetGame();
+            dialogStage.close();
+        });
+
+        noButton.setOnAction(e -> dialogStage.close());
+
+        // Create button layout
+        javafx.scene.layout.HBox buttonBox = new javafx.scene.layout.HBox(15);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().addAll(yesButton, noButton);
+
+        // Create the content layout
+        VBox content = new VBox(20);
+        content.setAlignment(Pos.CENTER);
+        content.setStyle("-fx-background-color: transparent;");
+        content.setPadding(new javafx.geometry.Insets(15, 15, 15, 15));
+        content.getChildren().addAll(messageLabel, buttonBox);
+
+        // Create main layout
+        javafx.scene.layout.StackPane layout = new javafx.scene.layout.StackPane();
+        layout.getChildren().addAll(hexBackground, content);
+        layout.setStyle("-fx-background-color: transparent;");
+
+        // Create and configure the scene
+        Scene scene = new Scene(layout, 300, 300);
+        scene.setFill(Color.TRANSPARENT);
+
+        // Configure and show the dialog
+        dialogStage.setScene(scene);
+
+        // Center on parent stage
+        dialogStage.setOnShown(e -> {
+            dialogStage.setX(parentStage.getX() + parentStage.getWidth()/2 - dialogStage.getWidth()/2);
+            dialogStage.setY(parentStage.getY() + parentStage.getHeight()/2 - dialogStage.getHeight()/2);
+
+            // Play entry animation
+            playDialogEntryAnimation(layout);
+        });
+
+        dialogStage.showAndWait();
+    }
+
+    /**
+     * Creates a hexagon shape for dialog backgrounds.
+     *
+     * @param playerColor The current player's color
+     * @return The styled hexagon polygon
+     */
+    private Polygon createDialogHexBackground(Color playerColor) {
+        Polygon hexagon = new Polygon();
+        double centerX = 150;
+        double centerY = 100;
+        double radius = 120;
+
+        for (int i = 0; i < 6; i++) {
+            double angle = 2.0 * Math.PI / 6 * i;
+            hexagon.getPoints().add(centerX + radius * Math.cos(angle));
+            hexagon.getPoints().add(centerY + radius * Math.sin(angle));
+        }
+
+        hexagon.setFill(Color.color(1, 1, 1, 0.9));
+        hexagon.setStroke(playerColor);
+        hexagon.setStrokeWidth(4);
+
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(Color.color(0, 0, 0, 0.7));
+        dropShadow.setRadius(20);
+        hexagon.setEffect(dropShadow);
+
+        return hexagon;
+    }
+
+    /**
+     * Creates and plays an entry animation for dialogs.
+     *
+     * @param node The node to animate
+     */
+    private void playDialogEntryAnimation(javafx.scene.Node node) {
+        ScaleTransition scale = new ScaleTransition(Duration.millis(200), node);
+        scale.setFromX(0.1);
+        scale.setFromY(0.1);
+        scale.setToX(1.0);
+        scale.setToY(1.0);
+
+        FadeTransition fade = new FadeTransition(Duration.millis(200), node);
+        fade.setFromValue(0.0);
+        fade.setToValue(1.0);
+
+        ParallelTransition parallel = new ParallelTransition(scale, fade);
+        parallel.play();
     }
 
     /**
@@ -881,41 +863,55 @@ public class hexOustUIController {
 
     /**
      * Plays the victory animation when a player wins.
+     * Enhanced version that fades out UI elements during animation.
      *
      * @param isRedWinner Whether red player is the winner
      */
     private void playWaveVictoryAnimation(boolean isRedWinner) {
+        // Create wave circle for victory animation
         Circle waveCircle = createVictoryWaveCircle(isRedWinner);
         hexagonPane.getChildren().add(waveCircle);
 
+        // Create wave expansion animation
         Timeline waveExpansion = createWaveExpansionAnimation(waveCircle);
 
+        // Create parallel animations container
         ParallelTransition parallelAnimations = new ParallelTransition();
         parallelAnimations.getChildren().add(waveExpansion);
 
+        // Prepare hexagons for victory animation
         List<Polygon> allHexes = prepareHexagonsForVictoryAnimation();
 
+        // Create sequential animation to reveal tiles
         SequentialTransition revealTiles = createRevealTilesAnimation(allHexes, isRedWinner);
         parallelAnimations.getChildren().add(revealTiles);
 
+        // Create victory text
         Text victoryText = createVictoryText(isRedWinner);
         hexagonPane.getChildren().add(victoryText);
 
+        // Create victory text animation
         ParallelTransition textAnimation = createVictoryTextAnimation(victoryText);
         parallelAnimations.getChildren().add(textAnimation);
 
-        // Pass isRedWinner to button creation methods
+        // Create fade-out animation for UI control elements
+        ParallelTransition fadeOutControls = createControlsFadeOutAnimation();
+        parallelAnimations.getChildren().add(fadeOutControls);
+
+        // Create buttons for victory screen
         Button resetButton = createResetButton(waveCircle, victoryText, isRedWinner);
         Button quitButton = createQuitButton(isRedWinner);
-
         hexagonPane.getChildren().addAll(resetButton, quitButton);
 
+        // Create button animations
         ParallelTransition buttonAnimation = createButtonAnimations(resetButton, quitButton);
 
+        // Create full animation sequence
         SequentialTransition fullAnimation = new SequentialTransition();
         fullAnimation.getChildren().add(parallelAnimations);
         fullAnimation.getChildren().add(buttonAnimation);
 
+        // Play the animation
         fullAnimation.play();
     }
 
@@ -966,18 +962,21 @@ public class hexOustUIController {
         List<Polygon> allHexes = new ArrayList<>();
         for (var node : hexagonPane.getChildren()) {
             if (node instanceof Polygon hex) {
-                hex.setStroke(BLACK);
-                hex.setStrokeWidth(3);
+                String polyId = hex.getId();
+                if (!(polyId.equals("exit0") || polyId.equals("reset0") || polyId.equals("turn0"))) {
+                    hex.setStroke(BLACK);
+                    hex.setStrokeWidth(3);
 
-                if (hex.getFill() == redFade || hex.getFill() == blueFade) {
-                    hex.setFill(baseColor);
+                    if (hex.getFill() == redFade || hex.getFill() == blueFade) {
+                        hex.setFill(baseColor);
+                    }
+
+                    hex.setOnMouseEntered(null);
+                    hex.setOnMouseExited(null);
+                    hex.setOnMouseClicked(null);
+
+                    allHexes.add(hex);
                 }
-
-                hex.setOnMouseEntered(null);
-                hex.setOnMouseExited(null);
-                hex.setOnMouseClicked(null);
-
-                allHexes.add(hex);
             }
         }
 
@@ -1060,7 +1059,57 @@ public class hexOustUIController {
     }
 
     /**
+     * Creates fade-out animations for UI control elements (turn indicator, reset button, exit button).
+     *
+     * @return The configured parallel transition containing all fade-out animations
+     */
+    private ParallelTransition createControlsFadeOutAnimation() {
+        ParallelTransition fadeOutTransitions = new ParallelTransition();
+
+        // Find each control element by its ID
+        Polygon exitButton = exit0;
+        Polygon resetButton = reset0;
+        Polygon turnButton = turn0;
+
+        // Add fade-out animation for exit button and its text
+        FadeTransition exitButtonFade = new FadeTransition(Duration.millis(600), exitButton);
+        exitButtonFade.setFromValue(1.0);
+        exitButtonFade.setToValue(0.0);
+        fadeOutTransitions.getChildren().add(exitButtonFade);
+
+        FadeTransition exitTextFade = new FadeTransition(Duration.millis(600), exitText);
+        exitTextFade.setFromValue(1.0);
+        exitTextFade.setToValue(0.0);
+        fadeOutTransitions.getChildren().add(exitTextFade);
+
+        // Add fade-out animation for reset button and its text
+        FadeTransition resetButtonFade = new FadeTransition(Duration.millis(600), resetButton);
+        resetButtonFade.setFromValue(1.0);
+        resetButtonFade.setToValue(0.0);
+        fadeOutTransitions.getChildren().add(resetButtonFade);
+
+        FadeTransition resetTextFade = new FadeTransition(Duration.millis(600), resetText);
+        resetTextFade.setFromValue(1.0);
+        resetTextFade.setToValue(0.0);
+        fadeOutTransitions.getChildren().add(resetTextFade);
+
+        // Add fade-out animation for turn indicator and its text
+        FadeTransition turnIndicatorFade = new FadeTransition(Duration.millis(600), turnButton);
+        turnIndicatorFade.setFromValue(1.0);
+        turnIndicatorFade.setToValue(0.0);
+        fadeOutTransitions.getChildren().add(turnIndicatorFade);
+
+        FadeTransition turnTextFade = new FadeTransition(Duration.millis(600), turnIndicator);
+        turnTextFade.setFromValue(1.0);
+        turnTextFade.setToValue(0.0);
+        fadeOutTransitions.getChildren().add(turnTextFade);
+
+        return fadeOutTransitions;
+    }
+
+    /**
      * Creates the reset button for the victory screen.
+     * Enhanced version with additional UI element restoration.
      *
      * @param waveCircle The wave circle to remove when resetting
      * @param victoryText The victory text to remove when resetting
@@ -1092,7 +1141,7 @@ public class hexOustUIController {
                         "-fx-text-fill: black;" +
                         "-fx-font-weight: bold;" +
                         "-fx-font-size: 14px;" +
-                        "-fx-background-radius: 60;" + // Rounded corners
+                        "-fx-background-radius: 60;" +
                         "-fx-border-color: black;" +
                         "-fx-border-width: 2;" +
                         "-fx-border-radius: 15;" +
@@ -1126,16 +1175,55 @@ public class hexOustUIController {
 
         // Set action
         resetButton.setOnAction(event -> {
-            resetGame();
+            // First remove UI elements from victory screen
             hexagonPane.getChildren().removeAll(
                     resetButton,
                     hexagonPane.lookup("#quitButton"),
                     victoryText,
                     waveCircle
             );
+
+            // Then reset the game
+            BoardLogic.clearBoard();
+
+            // Reset game hexagons, but exclude control polygons
+            for (var node : hexagonPane.getChildren()) {
+                if (node instanceof Polygon poly) {
+                    // Skip control polygons (exit, reset, turn indicator)
+                    String polyId = poly.getId();
+                    if (polyId != null && (polyId.equals("exit0") || polyId.equals("reset0") || polyId.equals("turn0"))) {
+                        continue;
+                    }
+
+                    resetHexagon(poly);
+                }
+            }
+
+            // Reset UI control elements to be visible again
+            resetUIControlVisibility();
+
+            isRedTurn = true;
+            updateTurnIndicator();
         });
 
         return resetButton;
+    }
+
+    /**
+     * Restores visibility of UI control elements after victory animation.
+     */
+    private void resetUIControlVisibility() {
+        // Restore exit button and text
+        exit0.setOpacity(1.0);
+        exitText.setOpacity(1.0);
+
+        // Restore reset button and text
+        reset0.setOpacity(1.0);
+        resetText.setOpacity(1.0);
+
+        // Restore turn indicator and text
+        turn0.setOpacity(1.0);
+        turnIndicator.setOpacity(1.0);
     }
 
     /**
@@ -1233,11 +1321,18 @@ public class hexOustUIController {
     /**
      * Resets the game to initial state.
      */
+    @FXML
     private void resetGame() {
         BoardLogic.clearBoard();
 
         for (var node : hexagonPane.getChildren()) {
             if (node instanceof Polygon poly) {
+                // Skip control polygons (exit, reset, turn indicator)
+                String polyId = poly.getId();
+                if (polyId != null && (polyId.equals("exit0") || polyId.equals("reset0") || polyId.equals("turn0"))) {
+                    continue;
+                }
+
                 resetHexagon(poly);
             }
         }
