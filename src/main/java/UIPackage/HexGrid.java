@@ -10,6 +10,8 @@ import java.util.Objects;
 class Point {
     public final double x;
     public final double y;
+    private static final double MIN_COORDINATE = 0;
+    private static final double MAX_COORDINATE = 600;
 
     /**
      * Creates a point with the specified coordinates.
@@ -18,8 +20,18 @@ class Point {
      * @param y The y-coordinate
      */
     public Point(double x, double y) {
+        validateCoordinate(x, "x");
+        validateCoordinate(y, "y");
         this.x = x;
         this.y = y;
+    }
+
+    private void validateCoordinate(double value, String coordinateName) {
+        if (value < MIN_COORDINATE || value > MAX_COORDINATE) {
+            throw new IllegalArgumentException(
+                    String.format("%s coordinate must be between %.0f and %.0f",
+                            coordinateName, MIN_COORDINATE, MAX_COORDINATE));
+        }
     }
 }
 
