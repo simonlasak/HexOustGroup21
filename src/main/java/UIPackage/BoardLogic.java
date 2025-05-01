@@ -235,42 +235,36 @@ public class BoardLogic {
         List<Integer> foundGroups = new ArrayList<>();
         List<HexCube> neighbours = c.getAllNeighbours();
 
+        Map<HexCube, Integer> colourHexagons;
         if (isRedTurn) {
-            for (HexCube neighbour : neighbours) {
-                if (redHexagons.containsKey(neighbour)) {
-                    foundGroups.add(redHexagons.get(neighbour));
-                }
-            }
+            colourHexagons = redHexagons;
         } else {
-            for (HexCube neighbour : neighbours) {
-                if (blueHexagons.containsKey(neighbour)) {
-                    foundGroups.add(blueHexagons.get(neighbour));
-                }
+            colourHexagons = blueHexagons;
+        }
+
+
+
+
+        for (HexCube neighbour : neighbours) {
+            if (colourHexagons.containsKey(neighbour)) {
+                foundGroups.add(colourHexagons.get(neighbour));
             }
         }
 
         foundGroups = removeDuplicates(foundGroups);
-
         if (foundGroups.isEmpty()) {
             return nextGroupNumber++;
         }
 
         int groupNumber = foundGroups.get(0);
         for (int num : foundGroups) {
-            if (isRedTurn) {
-                for (HexCube hex : redHexagons.keySet()) {
-                    if (redHexagons.get(hex) == num) {
-                        redHexagons.put(hex, groupNumber);
-                    }
-                }
-            } else {
-                for (HexCube hex : blueHexagons.keySet()) {
-                    if (blueHexagons.get(hex) == num) {
-                        blueHexagons.put(hex, groupNumber);
-                    }
+            for (HexCube hex : colourHexagons.keySet()) {
+                if (colourHexagons.get(hex) == num) {
+                    colourHexagons.put(hex, groupNumber);
                 }
             }
         }
+
         return groupNumber;
     }
 
