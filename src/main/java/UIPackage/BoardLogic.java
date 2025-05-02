@@ -140,7 +140,6 @@ public class BoardLogic {
      */
     private static void checkCapture(HexCube c, boolean isRedTurn) {
         HashMap<HexCube, Integer> opponentMap = isRedTurn ? blueHexagons : redHexagons;
-        HashMap<HexCube, Integer> ownMap = isRedTurn ? redHexagons : blueHexagons;
 
         List<HexCube> newGroup = getGroup(c, isRedTurn);
         int newGroupSize = newGroup.size();
