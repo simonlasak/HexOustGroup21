@@ -1,5 +1,8 @@
 package UIPackage;
 import org.junit.jupiter.api.*;
+
+import java.util.Set;
+
 import static UIPackage.BoardTestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 @Nested
@@ -78,5 +81,46 @@ class MultipleGroupMergeTests{
         assertEquals(group, getRedHexMap().get(a));
         assertEquals(group, getRedHexMap().get(b));
         assertEquals(group, getRedHexMap().get(c));
+    }
+}
+
+class CaptureAfterGroupMergeTests {
+    @Test
+    @DisplayName("Should capture after red groups merge into a larger one")
+    void testCaptureAfterGroupMerge() throws Exception {
+        BoardLogic.clearBoard();
+        BoardLogic.testMode = true;
+
+        // Blue group of size 2 that will be captured
+        HexCube blue1 = new HexCube(-1, 1, 0);
+        HexCube blue2 = new HexCube(-2, 1, 1);
+        BoardLogic.addToList(blue1, false);
+        BoardLogic.addToList(blue2, false);
+
+        // Red pieces that are not connected yet
+        HexCube redA = new HexCube(-1, 0, 1);
+        HexCube redB = new HexCube(0, -1, 1);
+        HexCube redC = new HexCube(0, 1, -1);
+
+        BoardLogic.addToList(redA, true); // Group 1
+        BoardLogic.addToList(redB, true); // Group 2
+        BoardLogic.addToList(redC, true); // Group 3
+
+        // This move connects all red pieces into one group and is adjacent to blue1
+        HexCube mergeAndCaptureMove = new HexCube(0, 0, 0);
+
+        // Is valid as the merged red group (size 4) can capture the blue group (size 2)
+        assertTrue(BoardLogic.isValidMove(mergeAndCaptureMove, true),
+                "Merged red group should be large enough to capture blue group");
+
+        BoardLogic.addToList(mergeAndCaptureMove, true); // Perform the move
+
+        // Verify blue group is captured
+        assertFalse(getBlueHexMap().containsKey(blue1), "Blue1 should be captured");
+        assertFalse(getBlueHexMap().containsKey(blue2), "Blue2 should be captured");
+
+        // Verify red group now includes all 4 hexes
+        Set<HexCube> expectedRed = Set.of(redA, redB, redC, mergeAndCaptureMove);
+        assertTrue(getRedHexMap().keySet().containsAll(expectedRed), "Red group should contain all merged pieces");
     }
 }

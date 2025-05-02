@@ -129,7 +129,7 @@ class CaptureTestLogic {
 
 }
 
-class CaptureTestLogicExtra {
+class CaptureAfterGroupGrowthTest {
 
     @BeforeEach
     void setup() {
@@ -138,8 +138,8 @@ class CaptureTestLogicExtra {
     }
 
     @Test
-    @DisplayName("Should capture when attacker group becomes larger")
-    void testNoCaptureSameSize() throws Exception {
+    @DisplayName("Should allow capture after red group grows larger than blue group")
+    void testCaptureAfterGroupGrowth() throws Exception {
         // Setup two connected blue pieces
         HexCube blue1 = new HexCube(-2, 1, 1);
         HexCube blue2 = new HexCube(-1, 1, 0);
@@ -167,8 +167,8 @@ class CaptureTestLogicExtra {
     }
 
     @Test
-    @DisplayName("Should not capture when red and blue group sizes are equal")
-    void testNoCaptureWhenGroupsEqualSize() throws Exception {
+    @DisplayName("Should reject capture when red and blue groups are equal in size")
+    void testNoCaptureWhenGroupSizesAreEqual() throws Exception {
         BoardLogic.testMode = true;
         BoardLogic.clearBoard();
 
@@ -190,8 +190,8 @@ class CaptureTestLogicExtra {
     }
 
     @Test
-    @DisplayName("Valid capture: red group bigger than touching blue group")
-    void testValidCaptureByRed() throws Exception {
+    @DisplayName("Should allow capture when red group is larger than blue group")
+    void testCaptureWhenRedGroupLarger() throws Exception {
         BoardLogic.clearBoard();
         BoardLogic.testMode = true;
 
