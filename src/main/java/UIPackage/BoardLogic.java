@@ -7,7 +7,6 @@ import java.util.*;
  * handles game rules such as move validation and capture mechanics.
  */
 public class BoardLogic {
-    //these were private but for junit testing, we have removed the private
     private static HashMap<HexCube, Integer> redHexagons = new HashMap<>();
     private static HashMap<HexCube, Integer> blueHexagons = new HashMap<>();
     private static int nextGroupNumber = 0;
@@ -75,14 +74,6 @@ public class BoardLogic {
         //no need to check for capturing if hex has no same colour neighbor
 
         return true;
-    }
-
-    /**
-     * Prints the current state of the board (red and blue hexagons) to standard output.
-     * Used primarily for debugging purposes.
-     */
-    public static void printLists() {
-        System.out.println("Red Hexagons: " + redHexagons + "\nBlue Hexagons: " + blueHexagons);
     }
 
     /**

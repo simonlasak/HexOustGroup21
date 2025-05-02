@@ -69,8 +69,6 @@ class CaptureTestLogic {
         BoardLogic.addToList(newBlueMove, false); // false = blue's turn
 
 
-        BoardLogic.printLists();
-
         // Expected red hexagons after capture
         Set<HexCube> expectedRed = new HashSet<>(Arrays.asList(
                 new HexCube(4, -2, -2),
