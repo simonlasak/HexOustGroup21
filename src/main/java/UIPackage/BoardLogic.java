@@ -100,17 +100,17 @@ public class BoardLogic {
      * @return true if placing a hexagon here would result in a capture, false otherwise
      */
     private static boolean canCapture(HexCube c, boolean isRedTurn) {
-        // simulate temporary placement
+        // Get references to current player's and opponent's hexagon maps
         HashMap<HexCube, Integer> ownMap = isRedTurn ? redHexagons : blueHexagons;
         HashMap<HexCube, Integer> opponentMap = isRedTurn ? blueHexagons : redHexagons;
 
         // temporarily add it to the player's color map
-        ownMap.put(c, -1); // use dummy group number, just for lookup
-        List<HexCube> newGroup = getGroup(c, isRedTurn);
+        ownMap.put(c, -1); // Temporary add for simulation, dummy group number
+        List<HexCube> newGroup = getGroup(c, isRedTurn);    // Get the new group after placement
         ownMap.remove(c); // remove simulation
 
         int newGroupSize = newGroup.size();
-        Set<Integer> checkedGroups = new HashSet<>();
+        Set<Integer> checkedGroups = new HashSet<>();       // To avoid checking the same group twice
 
         for (HexCube h : newGroup) {
             for (HexCube n : h.getAllNeighbours()) {
@@ -120,15 +120,16 @@ public class BoardLogic {
 
                     checkedGroups.add(groupId);
                     List<HexCube> opponentGroup = getGroup(n, !isRedTurn);
+
+                    // If any adjacent opponent group is equal or larger, capture is invalid
                     if (newGroupSize <= opponentGroup.size()) {
-                        return false; // not allowed, there's a larger or equal-sized opponent group
+                        return false;
                     }
                 }
             }
         }
 
-        return checkedGroups.size() > 0;  // true only if it touches at least one opponent group and all are smaller
-        //ie the size is greater than zero
+        return checkedGroups.size() > 0;  // Valid capture only if at least one smaller opponent group is adjacent
     }
 
     /**
@@ -141,23 +142,27 @@ public class BoardLogic {
     private static void checkCapture(HexCube c, boolean isRedTurn) {
         HashMap<HexCube, Integer> opponentMap = isRedTurn ? blueHexagons : redHexagons;
 
+        // Get the player's new connected group after placement
         List<HexCube> newGroup = getGroup(c, isRedTurn);
         int newGroupSize = newGroup.size();
-        Set<HexCube> toRemove = new HashSet<>();
+        Set<HexCube> hexToRemove = new HashSet<>();    // Store all opponent hexagons to be removed
 
+        // For each hex in the new group, check neighboring opponent groups
         for (HexCube h : newGroup) {
             for (HexCube n : h.getAllNeighbours()) {
                 if (opponentMap.containsKey(n)) {
                     List<HexCube> opponentGroup = getGroup(n, !isRedTurn);
+
+                    // If opponent group is smaller, mark for removal
                     if (newGroupSize > opponentGroup.size()) {
-                        toRemove.addAll(opponentGroup);
+                        hexToRemove.addAll(opponentGroup);
                     }
                 }
             }
         }
-
-        for (HexCube hex : toRemove) {
-            repaintHexagons(hex); //visually alter the board, repaint the hexagons using method below
+        // Remove all captured opponent hexagons and repaint them in the UI
+        for (HexCube hex : hexToRemove) {
+            repaintHexagons(hex); // Visually revert the hex to base color
             opponentMap.remove(hex);
         }
     }
