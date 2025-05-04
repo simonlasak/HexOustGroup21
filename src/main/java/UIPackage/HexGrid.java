@@ -26,6 +26,12 @@ class Point {
         this.y = y;
     }
 
+
+    /**
+     * Validates a coordinate value.
+     * @param value The coordinate
+     * @param coordinateName The name of the coordinate (e.g. "x" or "y")
+     */
     private void validateCoordinate(double value, String coordinateName) {
         if (value < MIN_COORDINATE || value > MAX_COORDINATE) {
             throw new IllegalArgumentException(
