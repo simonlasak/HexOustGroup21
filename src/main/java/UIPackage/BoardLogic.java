@@ -38,10 +38,10 @@ public class BoardLogic {
         int groupNumber = findGroupNumber(c, isRedTurn);
         if (isRedTurn) {
             redHexagons.put(c, groupNumber);
-            checkCapture(c, isRedTurn);
+            capture(c, isRedTurn);
         } else {
             blueHexagons.put(c, groupNumber);
-            checkCapture(c, isRedTurn);
+            capture(c, isRedTurn);
         }
     }
 
@@ -139,7 +139,7 @@ public class BoardLogic {
      * @param c The hex coordinates of the newly placed hexagon
      * @param isRedTurn true if it's Red player's turn, false if it's Blue player's turn
      */
-    private static void checkCapture(HexCube c, boolean isRedTurn) {
+    private static void capture(HexCube c, boolean isRedTurn) {
         HashMap<HexCube, Integer> opponentMap = isRedTurn ? blueHexagons : redHexagons;
 
         // Get the player's new connected group after placement
