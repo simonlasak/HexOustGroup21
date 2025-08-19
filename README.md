@@ -68,7 +68,7 @@ Capture **all of your opponent's stones** on the board.
 ## Interface Elements
 - **Turn Indicator:** Shows whose turn it is (top-right corner)  
 - **Hexagon Highlighting:** Valid moves glow when hovered  
-- **Victory Animation:** Plays when a player wins 🎉  
+- **Victory Animation:** Plays when a player wins 
 
 ---
 
