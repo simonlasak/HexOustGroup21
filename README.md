@@ -2,7 +2,7 @@
 
 **HexOust** is a strategic board game played on a hexagonal grid where two players (Red and Blue) take turns placing hexagons to capture their opponent's pieces.  
 
-We developed this game as part of the *Software Engineering Project II* module with two classmates — and received an **A+ grade**. 🎉
+We developed this game as part of the *Software Engineering Project II* module with two classmates — and received an **A+ grade**.
 
 ---
 
